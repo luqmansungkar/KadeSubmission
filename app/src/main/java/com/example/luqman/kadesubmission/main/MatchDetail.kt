@@ -1,4 +1,4 @@
-package com.example.luqman.kadesubmission2.main
+package com.example.luqman.kadesubmission.main
 
 import android.graphics.Color
 import android.graphics.Typeface
@@ -13,13 +13,13 @@ import android.webkit.WebSettings
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
-import com.example.luqman.kadesubmission2.R
-import com.example.luqman.kadesubmission2.api.ApiRepository
-import com.example.luqman.kadesubmission2.model.Event
-import com.example.luqman.kadesubmission2.model.Team
-import com.example.luqman.kadesubmission2.ui.MatchDetailUI
-import com.example.luqman.kadesubmission2.util.invisible
-import com.example.luqman.kadesubmission2.util.visible
+import com.example.luqman.kadesubmission.R
+import com.example.luqman.kadesubmission.api.ApiRepository
+import com.example.luqman.kadesubmission.model.Event
+import com.example.luqman.kadesubmission.model.Team
+import com.example.luqman.kadesubmission.ui.MatchDetailUI
+import com.example.luqman.kadesubmission.util.invisible
+import com.example.luqman.kadesubmission.util.visible
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import org.jetbrains.anko.find
@@ -89,7 +89,6 @@ class MatchDetail: AppCompatActivity(), DetailView{
         homeScoreSpan.setSpan(ForegroundColorSpan(Color.GRAY),0, homeScoreString.length, 0)
         homeScoreSpan.setSpan(RelativeSizeSpan(4f),0, homeScoreString.length, 0)
 
-        var scoreText = match.homeScore.toString() + " VS "+ match.awayScore.toString()
         val homeScoreText = if(match.homeScore == null) "" else match.homeScore.toString()
         homeScore.text = homeScoreText
         val awayScoreText = if(match.awayScore == null) "" else match.awayScore.toString()

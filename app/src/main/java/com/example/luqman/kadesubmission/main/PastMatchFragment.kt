@@ -1,4 +1,4 @@
-package com.example.luqman.kadesubmission2.main
+package com.example.luqman.kadesubmission.main
 
 
 import android.content.Context
@@ -8,14 +8,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import com.example.luqman.kadesubmission.R
 
-import com.example.luqman.kadesubmission2.api.ApiRepository
-import com.example.luqman.kadesubmission2.model.Event
-import com.example.luqman.kadesubmission2.ui.MatchListUI
+import com.example.luqman.kadesubmission.api.ApiRepository
+import com.example.luqman.kadesubmission.model.Event
+import com.example.luqman.kadesubmission.ui.MatchListUI
 import com.google.gson.Gson
 import org.jetbrains.anko.AnkoContext
+import org.jetbrains.anko.support.v4.find
 
-class NextMatchFragment : Fragment(), MainView {
+class PastMatchFragment : Fragment(), MainView {
 
     private var events: MutableList<Event> = mutableListOf()
     private lateinit var adapter: MatchAdapter
@@ -28,14 +30,14 @@ class NextMatchFragment : Fragment(), MainView {
     ): View? {
 
         adapter = MatchAdapter(events)
-        val view = MatchListUI(adapter).createView(AnkoContext.create(this@NextMatchFragment.context as Context, this))
+        val view = MatchListUI(adapter).createView(AnkoContext.create(this@PastMatchFragment.context as Context, this))
 //        progress = find(R.id.main_progress_bar)
 
         val request = ApiRepository()
         val gson = Gson()
         presenter = MainPresenter(this, request, gson)
 
-        presenter.getNextMatchList("4331")
+        presenter.getPastMatchList("4331")
 
         return view
     }

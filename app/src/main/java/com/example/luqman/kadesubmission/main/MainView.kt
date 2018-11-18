@@ -1,6 +1,6 @@
-package com.example.luqman.kadesubmission2.main
+package com.example.luqman.kadesubmission.main
 
-import com.example.luqman.kadesubmission2.model.Event
+import com.example.luqman.kadesubmission.model.Event
 
 interface MainView{
     fun showLoading()

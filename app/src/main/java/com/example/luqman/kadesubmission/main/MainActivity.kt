@@ -1,14 +1,14 @@
-package com.example.luqman.kadesubmission2.main
+package com.example.luqman.kadesubmission.main
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ProgressBar
-import com.example.luqman.kadesubmission2.R
-import com.example.luqman.kadesubmission2.api.ApiRepository
-import com.example.luqman.kadesubmission2.model.Event
-import com.example.luqman.kadesubmission2.ui.MatchListUI
-import com.example.luqman.kadesubmission2.util.invisible
-import com.example.luqman.kadesubmission2.util.visible
+import com.example.luqman.kadesubmission.R
+import com.example.luqman.kadesubmission.api.ApiRepository
+import com.example.luqman.kadesubmission.model.Event
+import com.example.luqman.kadesubmission.ui.MatchListUI
+import com.example.luqman.kadesubmission.util.invisible
+import com.example.luqman.kadesubmission.util.visible
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.find

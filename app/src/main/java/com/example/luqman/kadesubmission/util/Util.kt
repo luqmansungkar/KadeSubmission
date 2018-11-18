@@ -1,4 +1,4 @@
-package com.example.luqman.kadesubmission2.util
+package com.example.luqman.kadesubmission.util
 
 import android.opengl.Visibility
 import android.view.View

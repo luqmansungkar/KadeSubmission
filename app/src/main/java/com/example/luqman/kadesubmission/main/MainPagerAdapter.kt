@@ -1,4 +1,4 @@
-package com.example.luqman.kadesubmission2.main
+package com.example.luqman.kadesubmission.main
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager

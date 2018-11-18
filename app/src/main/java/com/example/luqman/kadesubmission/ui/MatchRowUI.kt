@@ -1,9 +1,9 @@
-package com.example.luqman.kadesubmission2.ui
+package com.example.luqman.kadesubmission.ui
 
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
-import com.example.luqman.kadesubmission2.R
+import com.example.luqman.kadesubmission.R
 import org.jetbrains.anko.*
 
 class MatchRowUI: AnkoComponent<ViewGroup>{

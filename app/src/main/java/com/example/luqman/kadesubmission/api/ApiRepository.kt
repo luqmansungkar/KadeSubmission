@@ -1,4 +1,4 @@
-package com.example.luqman.kadesubmission2.api
+package com.example.luqman.kadesubmission.api
 
 import java.net.URL
 

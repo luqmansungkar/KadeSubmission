@@ -1,7 +1,7 @@
-package com.example.luqman.kadesubmission2.api
+package com.example.luqman.kadesubmission.api
 
 import android.net.Uri
-import com.example.luqman.kadesubmission2.BuildConfig
+import com.example.luqman.kadesubmission.BuildConfig
 
 object TheSportDBApi{
     fun getPastMatches(leagueId: String?): String{

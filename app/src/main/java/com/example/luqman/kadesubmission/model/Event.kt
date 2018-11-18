@@ -1,4 +1,4 @@
-package com.example.luqman.kadesubmission2.model
+package com.example.luqman.kadesubmission.model
 
 import android.os.Parcel
 import android.os.Parcelable

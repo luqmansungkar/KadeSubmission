@@ -1,4 +1,4 @@
-package com.example.luqman.kadesubmission2.main
+package com.example.luqman.kadesubmission.main
 
 import android.content.Context
 import android.graphics.Color
@@ -10,9 +10,9 @@ import android.text.style.StyleSpan
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.example.luqman.kadesubmission2.R
-import com.example.luqman.kadesubmission2.model.Event
-import com.example.luqman.kadesubmission2.ui.MatchRowUI
+import com.example.luqman.kadesubmission.R
+import com.example.luqman.kadesubmission.model.Event
+import com.example.luqman.kadesubmission.ui.MatchRowUI
 import org.jetbrains.anko.*
 import java.text.SimpleDateFormat
 import java.time.LocalDate

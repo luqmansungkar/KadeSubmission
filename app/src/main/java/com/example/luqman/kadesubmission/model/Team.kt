@@ -1,4 +1,4 @@
-package com.example.luqman.kadesubmission2.model
+package com.example.luqman.kadesubmission.model
 
 import com.google.gson.annotations.SerializedName
 

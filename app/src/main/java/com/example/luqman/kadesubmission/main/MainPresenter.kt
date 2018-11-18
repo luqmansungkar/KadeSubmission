@@ -1,9 +1,9 @@
-package com.example.luqman.kadesubmission2.main
+package com.example.luqman.kadesubmission.main
 
 import android.util.Log
-import com.example.luqman.kadesubmission2.api.ApiRepository
-import com.example.luqman.kadesubmission2.api.TheSportDBApi
-import com.example.luqman.kadesubmission2.model.MatchResponse
+import com.example.luqman.kadesubmission.api.ApiRepository
+import com.example.luqman.kadesubmission.api.TheSportDBApi
+import com.example.luqman.kadesubmission.model.MatchResponse
 import com.google.gson.Gson
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread

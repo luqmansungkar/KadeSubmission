@@ -1,7 +1,7 @@
-package com.example.luqman.kadesubmission2.main
+package com.example.luqman.kadesubmission.main
 
 import android.widget.ImageView
-import com.example.luqman.kadesubmission2.model.Team
+import com.example.luqman.kadesubmission.model.Team
 
 interface DetailView{
     fun showLoading()

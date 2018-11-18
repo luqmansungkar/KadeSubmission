@@ -1,4 +1,4 @@
-package com.example.luqman.kadesubmission2
+package com.example.luqman.kadesubmission
 
 import org.junit.Test
 
