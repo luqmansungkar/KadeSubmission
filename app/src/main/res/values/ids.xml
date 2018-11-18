@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="match_date" type="id"/>
+    <item name="home_team" type="id"/>
+    <item name="home_score" type="id"/>
+    <item name="away_score" type="id"/>
+    <item name="away_team" type="id"/>
+    <item name="match_detail_date" type="id"/>
+    <item name="match_detail_home_image" type="id"/>
+    <item name="match_detail_home_team_name" type="id"/>
+    <item name="match_detail_score" type="id"/>
+    <item name="match_detail_away_image" type="id"/>
+    <item name="match_detail_away_team_name" type="id"/>
+    <item name="match_detail_home_goals_detail" type="id"/>
+    <item name="match_detail_away_goals_detail" type="id"/>
+    <item name="match_detail_home_shots" type="id"/>
+    <item name="match_detail_away_shots" type="id"/>
+    <item name="main_progress_bar" type="id"/>
+    <item name="detail_progress_bar" type="id"/>
+    <item name="match_detail_home_score" type="id"/>
+    <item name="match_detail_away_score" type="id"/>
+    <item name="match_detail_home_gk" type="id"/>
+    <item name="match_detail_away_gk" type="id"/>
+    <item name="match_detail_home_defense" type="id"/>
+    <item name="match_detail_away_defense" type="id"/>
+    <item name="match_detail_home_mid" type="id"/>
+    <item name="match_detail_away_mid" type="id"/>
+    <item name="match_detail_home_forward" type="id"/>
+    <item name="match_detail_away_forward" type="id"/>
+</resources>
