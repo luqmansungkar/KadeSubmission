@@ -51,6 +51,9 @@ class MatchDetail: AppCompatActivity(), DetailView{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        supportActionBar?.title = "Match Detail"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         val match = intent.getParcelableExtra<Event>("match")
 
 
