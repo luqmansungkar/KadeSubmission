@@ -1,5 +1,6 @@
 package com.example.luqman.kadesubmission.main
 
+import android.database.sqlite.SQLiteConstraintException
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -9,23 +10,35 @@ import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
 import android.text.style.StyleSpan
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.webkit.WebSettings
 import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.ScrollView
 import android.widget.TextView
 import com.example.luqman.kadesubmission.R
 import com.example.luqman.kadesubmission.api.ApiRepository
+import com.example.luqman.kadesubmission.database.database
 import com.example.luqman.kadesubmission.model.Event
+import com.example.luqman.kadesubmission.model.Favorite
 import com.example.luqman.kadesubmission.model.Team
 import com.example.luqman.kadesubmission.ui.MatchDetailUI
 import com.example.luqman.kadesubmission.util.invisible
 import com.example.luqman.kadesubmission.util.visible
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
+import org.jetbrains.anko.db.insert
+import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.find
 import org.jetbrains.anko.setContentView
 
 class MatchDetail: AppCompatActivity(), DetailView{
+
+    private var menuItem: Menu? = null
+    private var isFavorite: Boolean = false
+
+    private lateinit var match: Event
 
     private lateinit var matchDate: TextView
     private lateinit var homeImage: ImageView
@@ -48,13 +61,15 @@ class MatchDetail: AppCompatActivity(), DetailView{
     private lateinit var awayMid: TextView
     private lateinit var awayForward: TextView
 
+    private lateinit var scrollView: ScrollView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         supportActionBar?.title = "Match Detail"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val match = intent.getParcelableExtra<Event>("match")
+        match = intent.getParcelableExtra<Event>("match")
 
 
         MatchDetailUI().setContentView(this)
@@ -79,6 +94,7 @@ class MatchDetail: AppCompatActivity(), DetailView{
         awayDefense = find(R.id.match_detail_away_defense)
         awayMid = find(R.id.match_detail_away_mid)
         awayForward = find(R.id.match_detail_away_forward)
+        scrollView = find(R.id.detail_scroll_view)
 
         Log.d("tessa", match.toString())
 
@@ -128,5 +144,43 @@ class MatchDetail: AppCompatActivity(), DetailView{
 
     override fun showTeamBadge(team: Team, imageView: ImageView) {
         Picasso.get().load(team.teamBadge).into(imageView)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.detail_menu, menu)
+        menuItem = menu
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            android.R.id.home -> {
+                finish()
+                true
+            }
+            R.id.add_to_favorite -> {
+                addToFavorite()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun addToFavorite(){
+        try {
+            database.use {
+                insert(Favorite.TABLE_FAVORITE,
+                    Favorite.MATCH_ID to match.eventId,
+                    Favorite.MATCH_DATE to match.matchDate,
+                    Favorite.HOME_TEAM_NAME to match.homeTeam,
+                    Favorite.HOME_TEAM_SCORE to match.homeScore,
+                    Favorite.AWAY_TEAM_NAME to match.awayTeam,
+                    Favorite.AWAY_TEAM_SCORE to match.awayScore
+                    )
+            }
+            scrollView.snackbar("Added to favorite").show()
+        }catch (e: SQLiteConstraintException){
+            scrollView.snackbar(e.localizedMessage).show()
+        }
     }
 }

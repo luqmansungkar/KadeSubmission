@@ -15,6 +15,7 @@ class MatchDetailUI: AnkoComponent<MatchDetail>{
     override fun createView(ui: AnkoContext<MatchDetail>) = with(ui){
         scrollView {
             lparams(matchParent, matchParent)
+            id = R.id.detail_scroll_view
 
             verticalLayout {
                 lparams(matchParent, matchParent)
