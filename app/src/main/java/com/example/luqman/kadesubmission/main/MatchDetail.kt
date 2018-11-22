@@ -34,6 +34,7 @@ import org.jetbrains.anko.db.select
 import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.find
 import org.jetbrains.anko.setContentView
+import org.jetbrains.anko.toast
 
 class MatchDetail: AppCompatActivity(), DetailView{
 
@@ -184,10 +185,14 @@ class MatchDetail: AppCompatActivity(), DetailView{
                 true
             }
             R.id.add_to_favorite -> {
-                if(isFavorite) removeFromFavorite() else addToFavorite()
+                if(this::match.isInitialized){
+                    if(isFavorite) removeFromFavorite() else addToFavorite()
 
-                isFavorite = !isFavorite
-                setFavorite()
+                    isFavorite = !isFavorite
+                    setFavorite()
+                }else{
+                    toast("Please wait until match data loaded...").show()
+                }
                 true
             }
             else -> super.onOptionsItemSelected(item)
