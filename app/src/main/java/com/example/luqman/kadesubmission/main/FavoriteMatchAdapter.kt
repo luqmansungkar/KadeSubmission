@@ -70,7 +70,7 @@ class FavoriteViewHolder(view: View, val context: Context): RecyclerView.ViewHol
 
 
         itemView.setOnClickListener {
-            context.startActivity<MatchDetail>("match" to favorite)
+            context.startActivity<MatchDetail>("match_id" to favorite.matchId)
         }
     }
 }

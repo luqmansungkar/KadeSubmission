@@ -41,6 +41,8 @@ class MatchDetail: AppCompatActivity(), DetailView{
     private var menuItem: Menu? = null
     private var isFavorite: Boolean = false
 
+    private lateinit var matchId: String
+    private lateinit var presenter: MatchDetailPresenter
     private lateinit var match: Event
 
     private lateinit var matchDate: TextView
@@ -72,8 +74,7 @@ class MatchDetail: AppCompatActivity(), DetailView{
         supportActionBar?.title = "Match Detail"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        match = intent.getParcelableExtra<Event>("match")
-
+        matchId = intent.getStringExtra("match_id")
 
         MatchDetailUI().setContentView(this)
 
@@ -99,8 +100,40 @@ class MatchDetail: AppCompatActivity(), DetailView{
         awayForward = find(R.id.match_detail_away_forward)
         scrollView = find(R.id.detail_scroll_view)
 
-        Log.d("tessa", match.toString())
+        favoriteState()
 
+        val request = ApiRepository()
+        val gson = Gson()
+        presenter = MatchDetailPresenter(this, request, gson)
+
+        presenter.getMatchDetails(matchId)
+    }
+
+    private fun favoriteState(){
+        database.use {
+            val result = select(Favorite.TABLE_FAVORITE).whereArgs("(MATCH_ID = {id})", "id" to matchId)
+            val favorite = result.parseList(classParser<Favorite>())
+            if(! favorite.isEmpty()){
+                isFavorite = true
+            }
+        }
+    }
+
+    override fun showLoading() {
+        progress.visible()
+    }
+
+    override fun hideLoading() {
+        progress.invisible()
+    }
+
+    override fun showTeamBadge(team: Team, imageView: ImageView) {
+        Picasso.get().load(team.teamBadge).into(imageView)
+    }
+
+    override fun showMatchDetail(match: Event) {
+
+        this.match = match
         matchDate.text = match.matchDate
         homeTeamName.text = match.homeTeam
         awayTeamName.text = match.awayTeam
@@ -130,35 +163,12 @@ class MatchDetail: AppCompatActivity(), DetailView{
         awayMid.text = match.awayMid
         awayForward.text = match.awayForward
 
-        favoriteState()
+        loadTeamBadge(match)
+    }
 
-        val request = ApiRepository()
-        val gson = Gson()
-        val presenter = MatchDetailPresenter(this, request, gson)
+    private fun loadTeamBadge(match: Event){
         presenter.getTeamDetails(match.homeTeamId, homeImage)
         presenter.getTeamDetails(match.awayTeamId, awayImage)
-    }
-
-    private fun favoriteState(){
-        database.use {
-            val result = select(Favorite.TABLE_FAVORITE).whereArgs("(MATCH_ID = {id})", "id" to match.eventId.toString())
-            val favorite = result.parseList(classParser<Favorite>())
-            if(! favorite.isEmpty()){
-                isFavorite = true
-            }
-        }
-    }
-
-    override fun showLoading() {
-        progress.visible()
-    }
-
-    override fun hideLoading() {
-        progress.invisible()
-    }
-
-    override fun showTeamBadge(team: Team, imageView: ImageView) {
-        Picasso.get().load(team.teamBadge).into(imageView)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

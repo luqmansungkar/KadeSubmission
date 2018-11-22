@@ -68,7 +68,7 @@ class MatchViewHolder(view: View, val context: Context): RecyclerView.ViewHolder
 
 
         itemView.setOnClickListener {
-            context.startActivity<MatchDetail>("match" to event)
+            context.startActivity<MatchDetail>("match_id" to event.eventId)
         }
     }
 }
