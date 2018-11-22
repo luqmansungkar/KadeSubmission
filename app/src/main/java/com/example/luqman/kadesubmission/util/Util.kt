@@ -1,6 +1,5 @@
 package com.example.luqman.kadesubmission.util
 
-import android.opengl.Visibility
 import android.view.View
 
 fun View.visible(){

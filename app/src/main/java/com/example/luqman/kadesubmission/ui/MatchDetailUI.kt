@@ -5,10 +5,8 @@ import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
 import android.view.Gravity
 import android.view.View
-import android.view.ViewGroup
 import com.example.luqman.kadesubmission.R
 import com.example.luqman.kadesubmission.main.MatchDetail
-import kotlinx.android.synthetic.main.notification_template_lines_media.view.*
 import org.jetbrains.anko.*
 
 class MatchDetailUI: AnkoComponent<MatchDetail>{

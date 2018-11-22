@@ -5,7 +5,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.Gravity
 import android.widget.LinearLayout
 import com.example.luqman.kadesubmission.R
-import com.example.luqman.kadesubmission.main.MainActivity
 import com.example.luqman.kadesubmission.main.MatchAdapter
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView

@@ -1,7 +1,6 @@
 package com.example.luqman.kadesubmission.ui
 
 import android.content.Context
-import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.LinearLayout
 import com.example.luqman.kadesubmission.R
