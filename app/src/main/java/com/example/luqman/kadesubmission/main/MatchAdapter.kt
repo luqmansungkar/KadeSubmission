@@ -49,7 +49,7 @@ class MatchViewHolder(view: View, val context: Context): RecyclerView.ViewHolder
     fun bindItem(event: Event){
         val calendar: Calendar = Calendar.getInstance()
         val date = event.matchDate.toString().split("-")
-        calendar.set(date[0].toInt(), date[1].toInt(), date[2].toInt())
+        calendar.set(date[0].toInt(), date[1].toInt() -1, date[2].toInt())
         val formatter = SimpleDateFormat("EEE, dd MMM yyyy", Locale.getDefault())
         val dateString: String = formatter.format(calendar.time)
 
