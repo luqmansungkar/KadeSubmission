@@ -4,6 +4,7 @@ import android.database.sqlite.SQLiteConstraintException
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
@@ -12,7 +13,6 @@ import android.text.style.StyleSpan
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.webkit.WebSettings
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.ScrollView
@@ -28,7 +28,10 @@ import com.example.luqman.kadesubmission.util.invisible
 import com.example.luqman.kadesubmission.util.visible
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
+import org.jetbrains.anko.db.classParser
+import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.insert
+import org.jetbrains.anko.db.select
 import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.find
 import org.jetbrains.anko.setContentView
@@ -127,11 +130,23 @@ class MatchDetail: AppCompatActivity(), DetailView{
         awayMid.text = match.awayMid
         awayForward.text = match.awayForward
 
+        favoriteState()
+
         val request = ApiRepository()
         val gson = Gson()
         val presenter = MatchDetailPresenter(this, request, gson)
         presenter.getTeamDetails(match.homeTeamId, homeImage)
         presenter.getTeamDetails(match.awayTeamId, awayImage)
+    }
+
+    private fun favoriteState(){
+        database.use {
+            val result = select(Favorite.TABLE_FAVORITE).whereArgs("(MATCH_ID = {id})", "id" to match.eventId.toString())
+            val favorite = result.parseList(classParser<Favorite>())
+            if(! favorite.isEmpty()){
+                isFavorite = true
+            }
+        }
     }
 
     override fun showLoading() {
@@ -149,6 +164,7 @@ class MatchDetail: AppCompatActivity(), DetailView{
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.detail_menu, menu)
         menuItem = menu
+        setFavorite()
         return true
     }
 
@@ -159,7 +175,10 @@ class MatchDetail: AppCompatActivity(), DetailView{
                 true
             }
             R.id.add_to_favorite -> {
-                addToFavorite()
+                if(isFavorite) removeFromFavorite() else addToFavorite()
+
+                isFavorite = !isFavorite
+                setFavorite()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -181,6 +200,25 @@ class MatchDetail: AppCompatActivity(), DetailView{
             scrollView.snackbar("Added to favorite").show()
         }catch (e: SQLiteConstraintException){
             scrollView.snackbar(e.localizedMessage).show()
+        }
+    }
+
+    private fun removeFromFavorite(){
+        try {
+            database.use {
+                delete(Favorite.TABLE_FAVORITE, "(MATCH_ID = {id})", "id" to match.eventId.toString())
+            }
+            scrollView.snackbar("Removed from favorite").show()
+        }catch (e: SQLiteConstraintException){
+            scrollView.snackbar(e.localizedMessage).show()
+        }
+    }
+
+    private fun setFavorite(){
+        if(isFavorite){
+            menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_added_to_favorites)
+        }else{
+            menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_add_to_favorites)
         }
     }
 }
