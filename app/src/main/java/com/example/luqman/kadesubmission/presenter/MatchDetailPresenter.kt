@@ -1,6 +1,5 @@
 package com.example.luqman.kadesubmission.presenter
 
-import android.util.Log
 import android.widget.ImageView
 import com.example.luqman.kadesubmission.api.ApiRepository
 import com.example.luqman.kadesubmission.api.TheSportDBApi
@@ -8,8 +7,9 @@ import com.example.luqman.kadesubmission.view.DetailView
 import com.example.luqman.kadesubmission.model.MatchResponse
 import com.example.luqman.kadesubmission.model.TeamResponse
 import com.google.gson.Gson
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MatchDetailPresenter(
     private val view: DetailView,
@@ -20,16 +20,11 @@ class MatchDetailPresenter(
         view.showLoading()
         var url: String = TheSportDBApi.getTeamDetails(teamId)
 
-        Log.d("tessa", url)
-        doAsync {
-            val data = gson.fromJson(apiRepository.doRequest(url), TeamResponse::class.java)
+        GlobalScope.launch(Dispatchers.Main){
+            val data = gson.fromJson(apiRepository.doRequest(url).await(), TeamResponse::class.java)
 
-            Log.d("tessa", data.toString())
-
-            uiThread {
-                view.hideLoading()
-                view.showTeamBadge(data.teams[0], imageView)
-            }
+            view.hideLoading()
+            view.showTeamBadge(data.teams[0], imageView)
         }
     }
 
@@ -37,16 +32,11 @@ class MatchDetailPresenter(
         view.showLoading()
         var url: String = TheSportDBApi.getMatchDetails(eventId)
 
-        Log.d("tessa", url)
-        doAsync {
-            val data = gson.fromJson(apiRepository.doRequest(url), MatchResponse::class.java)
+        GlobalScope.launch(Dispatchers.Main){
+            val data = gson.fromJson(apiRepository.doRequest(url).await(), MatchResponse::class.java)
 
-            Log.d("tessa", data.toString())
-
-            uiThread {
-                view.hideLoading()
-                view.showMatchDetail(data.events[0])
-            }
+            view.hideLoading()
+            view.showMatchDetail(data.events[0])
         }
     }
 }
