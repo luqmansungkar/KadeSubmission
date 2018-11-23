@@ -1,6 +1,5 @@
 package com.example.luqman.kadesubmission.ui
 
-import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import com.example.luqman.kadesubmission.R
@@ -26,7 +25,7 @@ class MatchRowUI: AnkoComponent<ViewGroup>{
 
                     textView {
                         id = R.id.home_team
-                        gravity = Gravity.RIGHT
+                        textAlignment = View.TEXT_ALIGNMENT_TEXT_END
                         textSize = sp(6f).toFloat()
                     }.lparams(matchParent, wrapContent){
                         weight = 1f

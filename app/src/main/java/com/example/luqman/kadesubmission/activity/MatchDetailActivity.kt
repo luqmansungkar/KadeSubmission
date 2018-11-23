@@ -1,4 +1,4 @@
-package com.example.luqman.kadesubmission.main
+package com.example.luqman.kadesubmission.activity
 
 import android.database.sqlite.SQLiteConstraintException
 import android.graphics.Color
@@ -19,6 +19,8 @@ import android.widget.TextView
 import com.example.luqman.kadesubmission.R
 import com.example.luqman.kadesubmission.api.ApiRepository
 import com.example.luqman.kadesubmission.database.database
+import com.example.luqman.kadesubmission.view.DetailView
+import com.example.luqman.kadesubmission.presenter.MatchDetailPresenter
 import com.example.luqman.kadesubmission.model.Event
 import com.example.luqman.kadesubmission.model.Favorite
 import com.example.luqman.kadesubmission.model.Team
@@ -36,7 +38,7 @@ import org.jetbrains.anko.find
 import org.jetbrains.anko.setContentView
 import org.jetbrains.anko.toast
 
-class MatchDetail: AppCompatActivity(), DetailView{
+class MatchDetailActivity: AppCompatActivity(), DetailView {
 
     private var menuItem: Menu? = null
     private var isFavorite: Boolean = false

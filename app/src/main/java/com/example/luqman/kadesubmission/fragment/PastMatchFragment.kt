@@ -10,9 +10,9 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 
 import com.example.luqman.kadesubmission.api.ApiRepository
-import com.example.luqman.kadesubmission.main.MainPresenter
-import com.example.luqman.kadesubmission.main.MainView
-import com.example.luqman.kadesubmission.main.MatchAdapter
+import com.example.luqman.kadesubmission.presenter.MainPresenter
+import com.example.luqman.kadesubmission.view.MainView
+import com.example.luqman.kadesubmission.adapter.MatchAdapter
 import com.example.luqman.kadesubmission.model.Event
 import com.example.luqman.kadesubmission.ui.MatchListUI
 import com.google.gson.Gson

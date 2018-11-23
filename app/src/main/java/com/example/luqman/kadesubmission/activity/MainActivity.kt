@@ -1,13 +1,11 @@
-package com.example.luqman.kadesubmission.main
+package com.example.luqman.kadesubmission.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ProgressBar
 import com.example.luqman.kadesubmission.R
 import com.example.luqman.kadesubmission.fragment.FavoriteMatchFragment
 import com.example.luqman.kadesubmission.fragment.NextMatchFragment
 import com.example.luqman.kadesubmission.fragment.PastMatchFragment
-import com.example.luqman.kadesubmission.model.Event
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

@@ -10,14 +10,12 @@ import android.view.ViewGroup
 
 import com.example.luqman.kadesubmission.R
 import com.example.luqman.kadesubmission.database.database
-import com.example.luqman.kadesubmission.main.FavoriteMatchAdapter
-import com.example.luqman.kadesubmission.main.MatchDetail
+import com.example.luqman.kadesubmission.adapter.FavoriteMatchAdapter
 import com.example.luqman.kadesubmission.model.Favorite
 import com.example.luqman.kadesubmission.ui.FavoriteListUI
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.select
-import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.find
 
 class FavoriteMatchFragment : Fragment() {

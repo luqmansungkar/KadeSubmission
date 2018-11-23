@@ -6,11 +6,11 @@ import android.graphics.drawable.ColorDrawable
 import android.view.Gravity
 import android.view.View
 import com.example.luqman.kadesubmission.R
-import com.example.luqman.kadesubmission.main.MatchDetail
+import com.example.luqman.kadesubmission.activity.MatchDetailActivity
 import org.jetbrains.anko.*
 
-class MatchDetailUI: AnkoComponent<MatchDetail>{
-    override fun createView(ui: AnkoContext<MatchDetail>) = with(ui){
+class MatchDetailUI: AnkoComponent<MatchDetailActivity>{
+    override fun createView(ui: AnkoContext<MatchDetailActivity>) = with(ui){
         scrollView {
             lparams(matchParent, matchParent)
             id = R.id.detail_scroll_view
@@ -113,7 +113,7 @@ class MatchDetailUI: AnkoComponent<MatchDetail>{
                     }
 
                     textView {
-                        gravity = Gravity.RIGHT
+                        textAlignment = View.TEXT_ALIGNMENT_TEXT_END
                         id = R.id.match_detail_away_goals_detail
                     }.lparams(matchParent, wrapContent){
                         weight = 1f
@@ -138,7 +138,7 @@ class MatchDetailUI: AnkoComponent<MatchDetail>{
                     }
 
                     textView {
-                        gravity = Gravity.RIGHT
+                        textAlignment = View.TEXT_ALIGNMENT_TEXT_END
                         id = R.id.match_detail_away_shots
                         textSize = sp(6).toFloat()
                     }.lparams(matchParent, wrapContent){
@@ -179,7 +179,7 @@ class MatchDetailUI: AnkoComponent<MatchDetail>{
                         }
 
                         textView {
-                            gravity = Gravity.RIGHT
+                            textAlignment = View.TEXT_ALIGNMENT_TEXT_END
                             id = R.id.match_detail_away_gk
                             textSize = sp(6).toFloat()
                         }.lparams(matchParent, wrapContent){
@@ -205,7 +205,7 @@ class MatchDetailUI: AnkoComponent<MatchDetail>{
                         }
 
                         textView {
-                            gravity = Gravity.RIGHT
+                            textAlignment = View.TEXT_ALIGNMENT_TEXT_END
                             id = R.id.match_detail_away_defense
                             textSize = sp(6).toFloat()
                         }.lparams(matchParent, wrapContent){
@@ -231,7 +231,7 @@ class MatchDetailUI: AnkoComponent<MatchDetail>{
                         }
 
                         textView {
-                            gravity = Gravity.RIGHT
+                            textAlignment = View.TEXT_ALIGNMENT_TEXT_END
                             id = R.id.match_detail_away_mid
                             textSize = sp(6).toFloat()
                         }.lparams(matchParent, wrapContent){
@@ -257,7 +257,7 @@ class MatchDetailUI: AnkoComponent<MatchDetail>{
                         }
 
                         textView {
-                            gravity = Gravity.RIGHT
+                            textAlignment = View.TEXT_ALIGNMENT_TEXT_END
                             id = R.id.match_detail_away_forward
                             textSize = sp(6).toFloat()
                         }.lparams(matchParent, wrapContent){

@@ -1,4 +1,4 @@
-package com.example.luqman.kadesubmission.main
+package com.example.luqman.kadesubmission.view
 
 import com.example.luqman.kadesubmission.model.Event
 
