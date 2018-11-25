@@ -29,4 +29,5 @@
     <item name="match_detail_away_forward" type="id"/>
     <item name="detail_scroll_view" type="id"/>
     <item name="list_favorite" type="id"/>
+    <item name="list_event" type="id"/>
 </resources>

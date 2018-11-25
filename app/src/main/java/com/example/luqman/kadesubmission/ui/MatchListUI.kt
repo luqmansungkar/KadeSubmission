@@ -20,6 +20,7 @@ class MatchListUI(val matchAdapter: MatchAdapter): AnkoComponent<Fragment>{
                 lparams(matchParent, wrapContent)
                 layoutManager = LinearLayoutManager(context)
                 adapter = matchAdapter
+                id = R.id.list_event
             }
 
             progressBar {
