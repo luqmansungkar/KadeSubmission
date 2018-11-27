@@ -15,6 +15,7 @@ import com.example.luqman.kadesubmission.view.MainView
 import com.example.luqman.kadesubmission.adapter.MatchAdapter
 import com.example.luqman.kadesubmission.model.Event
 import com.example.luqman.kadesubmission.ui.MatchListUI
+import com.example.luqman.kadesubmission.util.EspressoIdlingResource
 import com.google.gson.Gson
 import org.jetbrains.anko.AnkoContext
 
@@ -55,6 +56,7 @@ class NextMatchFragment : Fragment(), MainView {
         events.clear()
         events.addAll(data)
         adapter.notifyDataSetChanged()
+        EspressoIdlingResource.decrement()
     }
 
 }

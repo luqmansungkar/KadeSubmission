@@ -23,7 +23,7 @@ import org.hamcrest.Matchers.*
 import org.hamcrest.TypeSafeMatcher
 import org.junit.runner.RunWith
 import android.support.test.espresso.UiController
-import android.support.test.espresso.idling.CountingIdlingResource
+import com.example.luqman.kadesubmission.util.EspressoIdlingResource
 import org.jetbrains.anko.find
 import org.junit.*
 
@@ -36,18 +36,15 @@ class MainActivityTest {
     @JvmField
     var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
 
-    private lateinit var idlingResource: CountingIdlingResource
-
     @Before
     fun setUp(){
-        idlingResource = CountingIdlingResource("ServerCalls")
-        IdlingRegistry.getInstance().register(idlingResource)
+        IdlingRegistry.getInstance().register(EspressoIdlingResource.idlingResource)
 
     }
 
     @After
     fun tearDown(){
-        IdlingRegistry.getInstance().unregister(idlingResource)
+        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.idlingResource)
     }
     @Test
     fun mainActivityTest() {

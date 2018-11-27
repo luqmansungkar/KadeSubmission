@@ -25,6 +25,7 @@ import com.example.luqman.kadesubmission.model.Event
 import com.example.luqman.kadesubmission.model.Favorite
 import com.example.luqman.kadesubmission.model.Team
 import com.example.luqman.kadesubmission.ui.MatchDetailUI
+import com.example.luqman.kadesubmission.util.EspressoIdlingResource
 import com.example.luqman.kadesubmission.util.invisible
 import com.example.luqman.kadesubmission.util.visible
 import com.google.gson.Gson
@@ -131,6 +132,7 @@ class MatchDetailActivity: AppCompatActivity(), DetailView {
 
     override fun showTeamBadge(team: Team, imageView: ImageView) {
         Picasso.get().load(team.teamBadge).into(imageView)
+        EspressoIdlingResource.decrement()
     }
 
     override fun showMatchDetail(match: Event) {
@@ -166,6 +168,7 @@ class MatchDetailActivity: AppCompatActivity(), DetailView {
         awayForward.text = match.awayForward
 
         loadTeamBadge(match)
+        EspressoIdlingResource.decrement()
     }
 
     private fun loadTeamBadge(match: Event){
