@@ -3,6 +3,7 @@ package com.example.luqman.kadesubmission.activity
 
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.Espresso.pressBack
+import android.support.test.espresso.IdlingRegistry
 import android.support.test.espresso.ViewAction
 import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.assertion.ViewAssertions.matches
@@ -20,12 +21,11 @@ import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.*
 import org.hamcrest.TypeSafeMatcher
-import org.hamcrest.core.IsInstanceOf
-import org.junit.Rule
-import org.junit.Test
 import org.junit.runner.RunWith
 import android.support.test.espresso.UiController
-import org.junit.Assert
+import android.support.test.espresso.idling.CountingIdlingResource
+import org.jetbrains.anko.find
+import org.junit.*
 
 
 @LargeTest
@@ -36,6 +36,19 @@ class MainActivityTest {
     @JvmField
     var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
 
+    private lateinit var idlingResource: CountingIdlingResource
+
+    @Before
+    fun setUp(){
+        idlingResource = CountingIdlingResource("ServerCalls")
+        IdlingRegistry.getInstance().register(idlingResource)
+
+    }
+
+    @After
+    fun tearDown(){
+        IdlingRegistry.getInstance().unregister(idlingResource)
+    }
     @Test
     fun mainActivityTest() {
         val textView = onView(
@@ -62,83 +75,21 @@ class MainActivityTest {
         )
         textView3.check(matches(withText("Favorites")))
 
-        val recyclerView = onView(
-            allOf(
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.main_container),
-                        0
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        recyclerView.check(matches(isDisplayed()))
+        onView(withId(R.id.list_event)).check(matches(isDisplayed()))
 
-        val textView4 = onView(
-            allOf(
-                withId(R.id.match_date), withText(not("")),
-                childAtPosition(
-                    childAtPosition(
-                        IsInstanceOf.instanceOf(android.support.v7.widget.RecyclerView::class.java),
-                        0
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        textView4.check(matches(isDisplayed()))
+        onView(withId(R.id.list_event)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(10))
+        var match_date = mActivityTestRule.activity.find<TextView>(R.id.match_date).text.toString()
+
+        Assert.assertNotEquals(match_date, "")
 
         onView(withId(R.id.list_event)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(10))
         onView(withId(R.id.list_event)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(10, click()))
 
-        val imageView = onView(
-            allOf(
-                withId(R.id.match_detail_home_image),
-                childAtPosition(
-                    childAtPosition(
-                        IsInstanceOf.instanceOf(android.widget.LinearLayout::class.java),
-                        0
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        imageView.check(matches(isDisplayed()))
+        onView(withId(R.id.match_detail_home_image)).check(matches(isDisplayed()))
 
-        val textView5 = onView(
-            allOf(
-                withId(R.id.match_detail_home_score), withText(not("")),
-                childAtPosition(
-                    childAtPosition(
-                        IsInstanceOf.instanceOf(android.widget.LinearLayout::class.java),
-                        1
-                    ),
-                    1
-                ),
-                isDisplayed()
-            )
-        )
-        textView5.check(matches(withText(not(""))))
+        onView(withId(R.id.match_detail_home_score)).check(matches(withText(not(""))))
 
-        val textView6 = onView(
-            allOf(
-                withId(R.id.match_detail_home_defense),
-                withText(not("")),
-                childAtPosition(
-                    childAtPosition(
-                        IsInstanceOf.instanceOf(android.widget.LinearLayout::class.java),
-                        2
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        textView6.check(matches(withText(not(""))))
+        onView(withId(R.id.match_detail_home_defense)).check(matches(withText(not(""))))
 
         val appCompatImageButton = onView(
             allOf(
@@ -158,49 +109,14 @@ class MainActivityTest {
         )
         appCompatImageButton.perform(click())
 
-        val recyclerView2 = onView(
-            allOf(
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.main_container),
-                        0
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        recyclerView2.check(matches(isDisplayed()))
+        onView(withId(R.id.list_event)).check(matches(isDisplayed()))
 
-        val _LinearLayout2 = onView(
-            allOf(
-                childAtPosition(
-                    childAtPosition(
-                        withClassName(`is`("org.jetbrains.anko._LinearLayout")),
-                        0
-                    ),
-                    5
-                ),
-                isDisplayed()
-            )
-        )
-        _LinearLayout2.perform(click())
+        onView(withId(R.id.list_event)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(10))
+        onView(withId(R.id.list_event)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(10, click()))
 
         pressBack()
 
-        val recyclerView3 = onView(
-            allOf(
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.main_container),
-                        0
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        recyclerView3.check(matches(isDisplayed()))
+        onView(withId(R.id.list_event)).check(matches(isDisplayed()))
 
         val bottomNavigationItemView = onView(
             allOf(
@@ -217,78 +133,23 @@ class MainActivityTest {
         )
         bottomNavigationItemView.perform(click())
 
-        val recyclerView4 = onView(
-            allOf(
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.main_container),
-                        0
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        recyclerView4.check(matches(isDisplayed()))
+        onView(withId(R.id.list_event)).check(matches(isDisplayed()))
 
-        val _LinearLayout3 = onView(
-            allOf(
-                childAtPosition(
-                    childAtPosition(
-                        withClassName(`is`("org.jetbrains.anko._LinearLayout")),
-                        0
-                    ),
-                    4
-                ),
-                isDisplayed()
-            )
-        )
-        _LinearLayout3.perform(click())
+        onView(withId(R.id.list_event)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(10))
+        match_date = mActivityTestRule.activity.find<TextView>(R.id.match_date).text.toString()
 
-        val imageView2 = onView(
-            allOf(
-                withId(R.id.match_detail_home_image),
-                childAtPosition(
-                    childAtPosition(
-                        IsInstanceOf.instanceOf(android.widget.LinearLayout::class.java),
-                        0
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        imageView2.check(matches(isDisplayed()))
+        Assert.assertNotEquals(match_date, "")
 
-        val textView9 = onView(
-            allOf(
-                withId(R.id.match_detail_home_score),
-                childAtPosition(
-                    childAtPosition(
-                        IsInstanceOf.instanceOf(android.widget.LinearLayout::class.java),
-                        1
-                    ),
-                    1
-                ),
-                isDisplayed()
-            )
-        )
-        textView9.check(matches(withText("")))
+        val match_score = mActivityTestRule.activity.find<TextView>(R.id.home_score).text.toString()
 
-        val textView10 = onView(
-            allOf(
-                withId(R.id.match_detail_home_defense),
-                childAtPosition(
-                    childAtPosition(
-                        IsInstanceOf.instanceOf(android.widget.LinearLayout::class.java),
-                        2
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        textView10.check(matches(withText("")))
+        Assert.assertEquals(match_score, "")
+
+        onView(withId(R.id.list_event)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(10))
+        onView(withId(R.id.list_event)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(10, click()))
+
+        onView(withId(R.id.match_detail_home_image)).check(matches(isDisplayed()))
+        onView(withId(R.id.match_detail_home_score)).check(matches(withText("")))
+        onView(withId(R.id.match_detail_home_defense)).check(matches(withText("")))
 
         val appCompatImageButton2 = onView(
             allOf(
@@ -308,77 +169,14 @@ class MainActivityTest {
         )
         appCompatImageButton2.perform(click())
 
-        val recyclerView5 = onView(
-            allOf(
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.main_container),
-                        0
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        recyclerView5.check(matches(isDisplayed()))
+        onView(withId(R.id.list_event)).check(matches(isDisplayed()))
 
-        val recyclerView6 = onView(
-            allOf(
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.main_container),
-                        0
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        recyclerView6.check(matches(isDisplayed()))
-
-        val recyclerView7 = onView(
-            allOf(
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.main_container),
-                        0
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        recyclerView7.check(matches(isDisplayed()))
-
-        val _LinearLayout4 = onView(
-            allOf(
-                childAtPosition(
-                    childAtPosition(
-                        withClassName(`is`("org.jetbrains.anko._LinearLayout")),
-                        0
-                    ),
-                    4
-                ),
-                isDisplayed()
-            )
-        )
-        _LinearLayout4.perform(click())
+        onView(withId(R.id.list_event)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(10))
+        onView(withId(R.id.list_event)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(10, click()))
 
         pressBack()
 
-        val linearLayout = onView(
-            allOf(
-                childAtPosition(
-                    childAtPosition(
-                        IsInstanceOf.instanceOf(android.widget.LinearLayout::class.java),
-                        0
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        linearLayout.check(matches(isDisplayed()))
+        onView(withId(R.id.list_event)).check(matches(isDisplayed()))
     }
 
     @Test
