@@ -4,7 +4,7 @@ import com.example.luqman.kadesubmission.api.ApiRepository
 import com.example.luqman.kadesubmission.api.TheSportDBApi
 import com.example.luqman.kadesubmission.model.Event
 import com.example.luqman.kadesubmission.model.MatchResponse
-import com.example.luqman.kadesubmission.view.MainView
+import com.example.luqman.kadesubmission.view.MatchView
 import com.google.gson.Gson
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -15,10 +15,10 @@ import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import org.mockito.Mockito.*
 
-class MainPresenterTest {
+class MatchPresenterTest {
 
     @Mock
-    private lateinit var view: MainView
+    private lateinit var view: MatchView
 
     @Mock
     private lateinit var gson: Gson
@@ -26,12 +26,12 @@ class MainPresenterTest {
     @Mock
     private lateinit var apiRepository: ApiRepository
 
-    private lateinit var presenter: MainPresenter
+    private lateinit var presenter: MatchPresenter
 
     @Before
     fun setUp(){
         MockitoAnnotations.initMocks(this)
-        presenter = MainPresenter(view, apiRepository, gson)
+        presenter = MatchPresenter(view, apiRepository, gson)
     }
 
     @Test
