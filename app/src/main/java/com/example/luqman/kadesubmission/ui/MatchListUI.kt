@@ -12,6 +12,12 @@ import org.jetbrains.anko.recyclerview.v7.recyclerView
 class MatchListUI(val matchAdapter: MatchAdapter): AnkoComponent<Fragment>{
     override fun createView(ui: AnkoContext<Fragment>) = with(ui){
         linearLayout {
+            spinner{
+                id = R.id.league_spinner
+            }.lparams(matchParent, wrapContent){
+                bottomMargin = dip(15)
+            }
+
             lparams(matchParent, wrapContent)
             orientation = LinearLayout.VERTICAL
             padding = dip(16)
