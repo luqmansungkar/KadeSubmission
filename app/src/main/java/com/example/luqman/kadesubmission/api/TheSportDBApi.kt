@@ -35,7 +35,7 @@ object TheSportDBApi{
     }
 
     fun getListAllLeagues(): String{
-        return buildUrl("all_leagues", null, null)
+        return buildUrl("search_all_leagues", "s", "Soccer")
     }
 
     fun getListTeamsByLeague(leagueId: String?): String{
