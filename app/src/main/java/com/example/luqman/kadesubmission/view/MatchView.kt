@@ -7,5 +7,5 @@ interface MatchView{
     fun showLoading()
     fun hideLoading()
     fun showLeagueList(leagues: List<Leagues>)
-    fun showMatchList(data: List<Event>)
+    fun showMatchList(data: List<Event>?)
 }
