@@ -31,4 +31,9 @@
     <item name="list_favorite" type="id"/>
     <item name="list_event" type="id"/>
     <item name="league_spinner" type="id"/>
+    <item name="team_row_badge" type="id"/>
+    <item name="team_row_name" type="id"/>
+    <item name="team_spinner" type="id"/>
+    <item name="list_team" type="id"/>
+    <item name="team_progress_bar" type="id"/>
 </resources>

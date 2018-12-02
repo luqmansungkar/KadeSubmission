@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">kadesubmission</string>
-    <string name="past_matches">Past Match</string>
-    <string name="next_matches">Next Match</string>
+    <string name="past_matches">Matches</string>
+    <string name="next_matches">Teams</string>
     <string name="favorites">Favorites</string>
     <string name="title_activity_match">Match</string>
 

@@ -117,7 +117,7 @@ class MainActivityTest {
 
         val bottomNavigationItemView = onView(
             allOf(
-                withId(R.id.next_matches), withContentDescription("Next Match"),
+                withId(R.id.teams), withContentDescription("Next Match"),
                 childAtPosition(
                     childAtPosition(
                         withId(R.id.bottom_navigation),
@@ -213,7 +213,7 @@ class MainActivityTest {
 
         pressBack()
 
-        onView(withId(R.id.next_matches)).perform(click())
+        onView(withId(R.id.teams)).perform(click())
 
         onView(withId(R.id.list_event)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(5))
         onView(withId(R.id.list_event)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(5, click()))
