@@ -1,5 +1,6 @@
 package com.example.luqman.kadesubmission.ui
 
+import android.graphics.Color
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
@@ -26,13 +27,17 @@ class PlayerRowUI: AnkoComponent<ViewGroup>{
                     textSize = 16f
                 }.lparams{
                     margin = dip(15)
+                    weight = 1f
                 }
 
                 textView {
                     id = R.id.player_row_position
                     textSize = 16f
+                    textAlignment = View.TEXT_ALIGNMENT_TEXT_END
+                    textColor = Color.GRAY
                 }.lparams{
                     margin = dip(15)
+                    weight = 1f
                 }
             }
         }

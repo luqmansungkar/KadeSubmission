@@ -16,6 +16,7 @@ import com.example.luqman.kadesubmission.view.TeamDetailView
 import com.google.gson.Gson
 import org.jetbrains.anko.*
 import org.jetbrains.anko.support.v4.find
+import org.jetbrains.anko.support.v4.nestedScrollView
 
 class TeamOverviewFragment: Fragment(), AnkoComponent<Context>, TeamDetailView{
 
@@ -36,7 +37,7 @@ class TeamOverviewFragment: Fragment(), AnkoComponent<Context>, TeamDetailView{
 
     override fun createView(ui: AnkoContext<Context>): View {
         return with(ui){
-            scrollView {
+            nestedScrollView {
                 lparams(matchParent, matchParent)
 
                 linearLayout {

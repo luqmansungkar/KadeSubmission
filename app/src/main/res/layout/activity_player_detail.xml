@@ -5,6 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="-22dp"
         tools:context=".activity.PlayerDetailActivity">
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,8 +14,9 @@
     >
         <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/player_fanart"
+                android:layout_marginBottom="20dp"
         />
         <LinearLayout
                 android:layout_width="match_parent"
@@ -39,7 +41,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/player_weight"
-                        android:text="70KG"
                         android:textAlignment="center"
                         android:textSize="35sp"
                 />
@@ -64,7 +65,6 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/player_height"
                         android:textAlignment="center"
-                        android:text="70KG"
                         android:textSize="35sp"
 
                 />
@@ -79,8 +79,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/player_desc"
-                    android:text="asdadsad"
             />
         </LinearLayout>
+        <ProgressBar android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:id="@+id/player_detail_progress_bar"
+        />
     </LinearLayout>
 </ScrollView>

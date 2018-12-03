@@ -52,7 +52,7 @@ class PlayerViewHolder(view: View, val context: Context): RecyclerView.ViewHolde
         playerPosition.text = player.playerPosition
 
         itemView.setOnClickListener {
-            context.startActivity<PlayerDetailActivity>("player_id" to player.playerId)
+            context.startActivity<PlayerDetailActivity>("player_id" to player.playerId, "player_name" to player.playerName)
         }
     }
 }
