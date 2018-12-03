@@ -29,6 +29,9 @@ data class Event(
     @SerializedName("dateEvent")
     var matchDate: String? = null,
 
+    @SerializedName("strTime")
+    var matchTime: String? = null,
+
     @SerializedName("strHomeGoalDetails")
     var homeGoalDetails: String? = null,
 
@@ -65,64 +68,4 @@ data class Event(
     @SerializedName("strAwayLineupForward")
     var awayForward: String? = null
 
-): Parcelable {
-    constructor(parcel: Parcel) : this(
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readValue(Int::class.java.classLoader) as? Int,
-        parcel.readValue(Int::class.java.classLoader) as? Int,
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readValue(Int::class.java.classLoader) as? Int,
-        parcel.readValue(Int::class.java.classLoader) as? Int,
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString()
-    )
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(eventId)
-        parcel.writeString(homeTeam)
-        parcel.writeString(awayTeam)
-        parcel.writeValue(homeScore)
-        parcel.writeValue(awayScore)
-        parcel.writeString(homeTeamId)
-        parcel.writeString(awayTeamId)
-        parcel.writeString(matchDate)
-        parcel.writeString(homeGoalDetails)
-        parcel.writeString(awayGoalDetails)
-        parcel.writeValue(homeShots)
-        parcel.writeValue(awayShots)
-        parcel.writeString(homeGk)
-        parcel.writeString(homeDefense)
-        parcel.writeString(homeMid)
-        parcel.writeString(homeForward)
-        parcel.writeString(awayGk)
-        parcel.writeString(awayDefense)
-        parcel.writeString(awayMid)
-        parcel.writeString(awayForward)
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<Event> {
-        override fun createFromParcel(parcel: Parcel): Event {
-            return Event(parcel)
-        }
-
-        override fun newArray(size: Int): Array<Event?> {
-            return arrayOfNulls(size)
-        }
-    }
-}
+)

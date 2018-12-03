@@ -210,6 +210,7 @@ class MatchDetailActivity: AppCompatActivity(), DetailView {
                 insert(Favorite.TABLE_FAVORITE,
                     Favorite.MATCH_ID to match.eventId,
                     Favorite.MATCH_DATE to match.matchDate,
+                    Favorite.MATCH_TIME to match.matchTime,
                     Favorite.HOME_TEAM_NAME to match.homeTeam,
                     Favorite.HOME_TEAM_SCORE to match.homeScore,
                     Favorite.AWAY_TEAM_NAME to match.awayTeam,

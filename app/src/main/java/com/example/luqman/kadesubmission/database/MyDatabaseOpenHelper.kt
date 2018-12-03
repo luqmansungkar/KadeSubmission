@@ -24,6 +24,7 @@ class MyDatabaseOpenHelper(ctx: Context): ManagedSQLiteOpenHelper(ctx, "Favorite
                 Favorite.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
                 Favorite.MATCH_ID to TEXT + UNIQUE,
                 Favorite.MATCH_DATE to TEXT,
+                Favorite.MATCH_TIME to TEXT,
                 Favorite.HOME_TEAM_NAME to TEXT,
                 Favorite.HOME_TEAM_SCORE to INTEGER,
                 Favorite.AWAY_TEAM_NAME to TEXT,

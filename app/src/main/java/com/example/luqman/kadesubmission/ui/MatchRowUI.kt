@@ -14,10 +14,15 @@ class MatchRowUI: AnkoComponent<ViewGroup>{
                 }
 
                 textView {
-                    text = "Tanggal"
                     textAlignment = View.TEXT_ALIGNMENT_CENTER
 //                    padding = dip(10)
                     id = R.id.match_date
+                }.lparams(matchParent, wrapContent)
+
+                textView {
+                    textAlignment = View.TEXT_ALIGNMENT_CENTER
+//                    padding = dip(10)
+                    id = R.id.match_time
                 }.lparams(matchParent, wrapContent)
 
                 linearLayout {

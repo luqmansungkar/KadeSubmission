@@ -42,4 +42,5 @@
     <item name="player_row_position" type="id"/>
     <item name="list_player" type="id"/>
     <item name="list_player_progress_bar" type="id"/>
+    <item name="match_time" type="id"/>
 </resources>

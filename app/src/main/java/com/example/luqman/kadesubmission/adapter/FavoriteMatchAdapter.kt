@@ -44,6 +44,7 @@ class FavoriteMatchAdapter(private val favorite: List<Favorite>):
 
 class FavoriteViewHolder(view: View, val context: Context): RecyclerView.ViewHolder(view){
     private val matchDate: TextView = view.find(R.id.match_date)
+    private val matchTime: TextView = view.find(R.id.match_time)
     private val homeTeam: TextView = view.find(R.id.home_team)
     private val homeScore: TextView = view.find(R.id.home_score)
     private val awayTeam: TextView = view.find(R.id.away_team)
@@ -60,6 +61,7 @@ class FavoriteViewHolder(view: View, val context: Context): RecyclerView.ViewHol
         dateSpannable.setSpan(StyleSpan(Typeface.BOLD), 0,dateString.length, 0)
         dateSpannable.setSpan(ForegroundColorSpan(Color.GRAY),0, dateString.length, 0)
         matchDate.text =  dateSpannable
+        matchTime.text = favorite.matchTime
         homeTeam.text = favorite.homeTeamName
 
         val homeScoreText = if(favorite.homeTeamScore == null) "" else favorite.homeTeamScore.toString()
