@@ -4,11 +4,13 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import com.example.luqman.kadesubmission.fragment.FavoriteMatchFragment
+import com.example.luqman.kadesubmission.fragment.FavoriteTeamFragment
 
 class FavoritePagerAdapter(fm: FragmentManager): FragmentPagerAdapter(fm){
 
     private val pages = listOf<Fragment>(
-        FavoriteMatchFragment()
+        FavoriteMatchFragment(),
+        FavoriteTeamFragment()
     )
 
     override fun getItem(p0: Int): Fragment {
