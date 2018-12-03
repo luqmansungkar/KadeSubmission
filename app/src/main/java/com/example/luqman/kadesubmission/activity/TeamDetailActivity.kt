@@ -2,6 +2,7 @@ package com.example.luqman.kadesubmission.activity
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.luqman.kadesubmission.R
@@ -18,9 +19,11 @@ import org.jetbrains.anko.find
 
 class TeamDetailActivity: AppCompatActivity(), TeamDetailView{
 
+    private var menuItem: Menu? = null
+    private var isFavorite: Boolean = false
+
     private lateinit var teamId: String
     private lateinit var presenter: TeamDetailPresenter
-    private lateinit var team: Team
 
     private lateinit var teamBadge: ImageView
     private lateinit var teamName: TextView
@@ -30,6 +33,9 @@ class TeamDetailActivity: AppCompatActivity(), TeamDetailView{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.team_detail)
+
+        supportActionBar?.title = "Team Detail"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         teamId = intent.getStringExtra("team_id")
 
@@ -48,6 +54,12 @@ class TeamDetailActivity: AppCompatActivity(), TeamDetailView{
         team_detail_viewpager.adapter = fragmentAdapter
 
         team_detail_tab.setupWithViewPager(team_detail_viewpager)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.detail_menu, menu)
+        menuItem = menu
+        return true
     }
 
     override fun showLoading() {

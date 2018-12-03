@@ -4,6 +4,7 @@
     <string name="next_matches">Teams</string>
     <string name="favorites">Favorites</string>
     <string name="title_activity_match">Match</string>
+    <string name="title_activity_player_detail">Player Detail</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 
