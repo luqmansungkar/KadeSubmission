@@ -3,7 +3,7 @@ package com.example.luqman.kadesubmission.activity
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.example.luqman.kadesubmission.R
-import com.example.luqman.kadesubmission.fragment.FavoriteMatchFragment
+import com.example.luqman.kadesubmission.fragment.FavoriteFragment
 import com.example.luqman.kadesubmission.fragment.MatchFragment
 import com.example.luqman.kadesubmission.fragment.TeamFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         if(savedInstanceState == null){
             supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.main_container, FavoriteMatchFragment(), FavoriteMatchFragment::class.java.simpleName)
+                .replace(R.id.main_container, FavoriteFragment(), FavoriteFragment::class.java.simpleName)
                 .commit()
         }
     }
