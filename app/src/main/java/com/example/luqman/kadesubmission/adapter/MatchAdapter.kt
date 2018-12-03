@@ -14,9 +14,8 @@ import com.example.luqman.kadesubmission.R
 import com.example.luqman.kadesubmission.activity.MatchDetailActivity
 import com.example.luqman.kadesubmission.model.Event
 import com.example.luqman.kadesubmission.ui.MatchRowUI
+import com.example.luqman.kadesubmission.util.DateTimeUtil
 import org.jetbrains.anko.*
-import java.text.SimpleDateFormat
-import java.util.*
 
 class MatchAdapter(private val events: List<Event>):
         RecyclerView.Adapter<MatchViewHolder>(){
@@ -49,17 +48,17 @@ class MatchViewHolder(view: View, val context: Context): RecyclerView.ViewHolder
     private val awayScore: TextView = view.find(R.id.away_score)
 
     fun bindItem(event: Event){
-        val calendar: Calendar = Calendar.getInstance()
-        val date = event.matchDate.toString().split("-")
-        calendar.set(date[0].toInt(), date[1].toInt() -1, date[2].toInt())
-        val formatter = SimpleDateFormat("EEE, dd MMM yyyy", Locale.getDefault())
-        val dateString: String = formatter.format(calendar.time)
+        val sourceDateTimeString = event.matchDate+" "+event.matchTime
+        val sourceDateTimeFormat = "yyyy-MM-dd HH:mm:ssZZ"
+
+        val dateString: String = DateTimeUtil.formatDateTime(sourceDateTimeString, sourceDateTimeFormat, "EEE, dd MMM yyyy")
+        val timeString: String = DateTimeUtil.formatDateTime(sourceDateTimeString, sourceDateTimeFormat, "HH:mm")
 
         val dateSpannable = SpannableStringBuilder(dateString)
         dateSpannable.setSpan(StyleSpan(Typeface.BOLD), 0,dateString.length, 0)
         dateSpannable.setSpan(ForegroundColorSpan(Color.GRAY),0, dateString.length, 0)
         matchDate.text =  dateSpannable
-        matchTime.text = event.matchTime
+        matchTime.text = timeString
         homeTeam.text = event.homeTeam
 
         val homeScoreText = if(event.homeScore == null) "" else event.homeScore.toString()
