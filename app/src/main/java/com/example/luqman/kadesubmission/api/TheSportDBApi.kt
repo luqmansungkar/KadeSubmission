@@ -42,8 +42,8 @@ object TheSportDBApi{
         return buildUrl("lookup_all_teams", "id", leagueId)
     }
 
-    fun getListPlayersByTeam(teamName: String?): String{
-        return buildUrl("searchplayers", "t", teamName)
+    fun getListPlayersByTeam(teamId: String?): String{
+        return buildUrl("lookup_all_players", "id", teamId)
     }
 
     fun getPlayerDetailsById(playerId: String?): String{

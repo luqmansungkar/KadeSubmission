@@ -7,5 +7,5 @@ interface TeamView{
     fun showLoading()
     fun hideLoading()
     fun showLeagueList(leagues: List<Leagues>)
-    fun showTeamList(teams: List<Team>)
+    fun showTeamList(teams: List<Team>?)
 }

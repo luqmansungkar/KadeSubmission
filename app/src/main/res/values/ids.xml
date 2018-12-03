@@ -36,4 +36,10 @@
     <item name="team_spinner" type="id"/>
     <item name="list_team" type="id"/>
     <item name="team_progress_bar" type="id"/>
+    <item name="team_overview_desc" type="id"/>
+    <item name="player_row_cutout" type="id"/>
+    <item name="player_row_name" type="id"/>
+    <item name="player_row_position" type="id"/>
+    <item name="list_player" type="id"/>
+    <item name="list_player_progress_bar" type="id"/>
 </resources>

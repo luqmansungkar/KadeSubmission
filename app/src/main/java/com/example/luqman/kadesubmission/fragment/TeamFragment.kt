@@ -89,9 +89,11 @@ class TeamFragment: Fragment(), TeamView{
         EspressoIdlingResource.decrement()
     }
 
-    override fun showTeamList(teams: List<Team>) {
+    override fun showTeamList(teams: List<Team>?) {
         this.teams.clear()
-        this.teams.addAll(teams)
+        if(teams != null){
+            this.teams.addAll(teams)
+        }
         adapter.notifyDataSetChanged()
         EspressoIdlingResource.decrement()
     }
