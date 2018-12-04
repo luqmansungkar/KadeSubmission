@@ -224,28 +224,6 @@ class MainActivityTest {
             withText("Added to favorite")
         )).check(matches(isDisplayed()))
 
-        pressBack()
-
-        onView(visibleListEvent).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(5))
-        onView(visibleListEvent).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(5, click()))
-
-        onView(withId(R.id.add_to_favorite)).perform(click())
-        onView(allOf(
-            withId(R.id.snackbar_text),
-            withText("Removed from favorite")
-        )).check(matches(isDisplayed()))
-
-        pressBack()
-
-        onView(visibleListEvent).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(5))
-        onView(visibleListEvent).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(5, click()))
-
-        onView(withId(R.id.add_to_favorite)).perform(click())
-        onView(allOf(
-            withId(R.id.snackbar_text),
-            withText("Added to favorite")
-        )).check(matches(isDisplayed()))
-
         val savedTeamName1 = getText(withId(R.id.match_detail_home_team_name))
 
         pressBack()
@@ -256,28 +234,6 @@ class MainActivityTest {
         onData(allOf(`is`("Spanish La Liga"))).perform(click())
 
         val visibleListTeam = allOf(withId(R.id.list_team), isDisplayed())
-
-        onView(visibleListTeam).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(5))
-        onView(visibleListTeam).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(5, click()))
-
-        onView(withId(R.id.add_to_favorite)).perform(click())
-        onView(allOf(
-            withId(R.id.snackbar_text),
-            withText("Added to favorite")
-        )).check(matches(isDisplayed()))
-
-        pressBack()
-
-        onView(visibleListTeam).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(5))
-        onView(visibleListTeam).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(5, click()))
-
-        onView(withId(R.id.add_to_favorite)).perform(click())
-        onView(allOf(
-            withId(R.id.snackbar_text),
-            withText("Removed from favorite")
-        )).check(matches(isDisplayed()))
-
-        pressBack()
 
         onView(visibleListTeam).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(5))
         onView(visibleListTeam).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(5, click()))
