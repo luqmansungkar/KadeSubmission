@@ -12,7 +12,7 @@
             android:id="@+id/teams"
             android:enabled="true"
             android:title="@string/next_matches"
-            android:icon="@drawable/ic_matches"
+            android:icon="@drawable/ic_group_black_24dp"
             app:showAsAction="ifRoom"/>
 
     <item
