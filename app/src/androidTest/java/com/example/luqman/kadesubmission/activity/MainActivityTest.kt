@@ -1,8 +1,7 @@
 package com.example.luqman.kadesubmission.activity
 
 
-import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.Espresso.pressBack
+import android.support.test.espresso.Espresso.*
 import android.support.test.espresso.IdlingRegistry
 import android.support.test.espresso.ViewAction
 import android.support.test.espresso.action.ViewActions.click
@@ -47,40 +46,22 @@ class MainActivityTest {
         IdlingRegistry.getInstance().unregister(EspressoIdlingResource.idlingResource)
     }
     @Test
-    fun mainActivityTest() {
-        val textView = onView(
-            allOf(
-                withId(R.id.largeLabel), withText("Past Match"),
-                isDisplayed()
-            )
-        )
-        textView.check(matches(withText("Past Match")))
+    fun matchFragmentTest() {
 
-        val textView2 = onView(
-            allOf(
-                withId(R.id.smallLabel), withText("Next Match"),
-                isDisplayed()
-            )
-        )
-        textView2.check(matches(withText("Next Match")))
+        onView(allOf(withId(R.id.league_spinner), isDisplayed())).perform(click())
+        onData(allOf(`is`("Spanish La Liga"))).perform(click())
 
-        val textView3 = onView(
-            allOf(
-                withId(R.id.smallLabel), withText("Favorites"),
-                isDisplayed()
-            )
-        )
-        textView3.check(matches(withText("Favorites")))
+        val visibleListEvent = allOf(withId(R.id.list_event), isDisplayed())
 
-        onView(withId(R.id.list_event)).check(matches(isDisplayed()))
+        onView(visibleListEvent).check(matches(isDisplayed()))
 
-        onView(withId(R.id.list_event)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(10))
+        onView(visibleListEvent).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(10))
         var match_date = mActivityTestRule.activity.find<TextView>(R.id.match_date).text.toString()
 
         Assert.assertNotEquals(match_date, "")
 
-        onView(withId(R.id.list_event)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(10))
-        onView(withId(R.id.list_event)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(10, click()))
+        onView(visibleListEvent).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(10))
+        onView(visibleListEvent).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(10, click()))
 
         onView(withId(R.id.match_detail_home_image)).check(matches(isDisplayed()))
 
@@ -106,21 +87,21 @@ class MainActivityTest {
         )
         appCompatImageButton.perform(click())
 
-        onView(withId(R.id.list_event)).check(matches(isDisplayed()))
+        onView(visibleListEvent).check(matches(isDisplayed()))
 
-        onView(withId(R.id.list_event)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(10))
-        onView(withId(R.id.list_event)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(10, click()))
+        onView(visibleListEvent).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(10))
+        onView(visibleListEvent).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(10, click()))
 
         pressBack()
 
-        onView(withId(R.id.list_event)).check(matches(isDisplayed()))
+        onView(visibleListEvent).check(matches(isDisplayed()))
 
-        val bottomNavigationItemView = onView(
+        val nextMatchTab = onView(
             allOf(
-                withId(R.id.teams), withContentDescription("Next Match"),
+                withContentDescription("Next Match"),
                 childAtPosition(
                     childAtPosition(
-                        withId(R.id.bottom_navigation),
+                        withId(R.id.tab_match),
                         0
                     ),
                     1
@@ -128,21 +109,16 @@ class MainActivityTest {
                 isDisplayed()
             )
         )
-        bottomNavigationItemView.perform(click())
 
-        onView(withId(R.id.list_event)).check(matches(isDisplayed()))
+        nextMatchTab.perform(click())
 
-        onView(withId(R.id.list_event)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(10))
-        match_date = mActivityTestRule.activity.find<TextView>(R.id.match_date).text.toString()
+        onView(allOf(withId(R.id.league_spinner), isDisplayed())).perform(click())
+        onData(allOf(`is`("Spanish La Liga"))).perform(click())
 
-        Assert.assertNotEquals(match_date, "")
+        onView(visibleListEvent).check(matches(isDisplayed()))
 
-        val match_score = mActivityTestRule.activity.find<TextView>(R.id.home_score).text.toString()
-
-        Assert.assertEquals(match_score, "")
-
-        onView(withId(R.id.list_event)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(10))
-        onView(withId(R.id.list_event)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(10, click()))
+        onView(visibleListEvent).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(10))
+        onView(visibleListEvent).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(10, click()))
 
         onView(withId(R.id.match_detail_home_image)).check(matches(isDisplayed()))
         onView(withId(R.id.match_detail_home_score)).check(matches(withText("")))
@@ -166,14 +142,14 @@ class MainActivityTest {
         )
         appCompatImageButton2.perform(click())
 
-        onView(withId(R.id.list_event)).check(matches(isDisplayed()))
+        onView(visibleListEvent).check(matches(isDisplayed()))
 
-        onView(withId(R.id.list_event)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(10))
-        onView(withId(R.id.list_event)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(10, click()))
+        onView(visibleListEvent).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(10))
+        onView(visibleListEvent).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(10, click()))
 
         pressBack()
 
-        onView(withId(R.id.list_event)).check(matches(isDisplayed()))
+        onView(visibleListEvent).check(matches(isDisplayed()))
     }
 
     @Test
