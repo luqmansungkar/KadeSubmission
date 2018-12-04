@@ -90,6 +90,8 @@ class PastMatchFragment : Fragment(), MatchView {
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 presenter.getPastMatchList(leagueMap[position])
+                events.clear()
+                adapter.notifyDataSetChanged()
             }
         }
 

@@ -89,6 +89,8 @@ class NextMatchFragment : Fragment(), MatchView {
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 presenter.getNextMatchList(leagueMap[position])
+                events.clear()
+                adapter.notifyDataSetChanged()
             }
         }
 
