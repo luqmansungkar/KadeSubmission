@@ -46,7 +46,7 @@ class TeamAdapter(private var teams: List<Team>): RecyclerView.Adapter<TeamViewH
                 if(searchQuery.isEmpty()){
                     filteredTeams = teams
                 }else{
-                    var teamFiltered : MutableList<Team> = mutableListOf()
+                    val teamFiltered : MutableList<Team> = mutableListOf()
                     teams.forEach {
                         var teamName = it.teamName
                         teamName = teamName ?: ""
@@ -57,7 +57,7 @@ class TeamAdapter(private var teams: List<Team>): RecyclerView.Adapter<TeamViewH
                     }
                     filteredTeams = teamFiltered
                 }
-                var result = FilterResults()
+                val result = FilterResults()
                 result.values = filteredTeams
                 return result
             }

@@ -117,6 +117,11 @@ class TeamFragment: Fragment(), TeamView{
                 adapter.filter.filter(it)
                 false
             }
+
+            onQueryTextSubmit {
+                adapter.filter.filter(it)
+                false
+            }
         }
     }
 

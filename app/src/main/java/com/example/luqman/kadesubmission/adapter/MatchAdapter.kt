@@ -9,6 +9,8 @@ import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.TextView
 import com.example.luqman.kadesubmission.R
 import com.example.luqman.kadesubmission.activity.MatchDetailActivity
@@ -18,7 +20,9 @@ import com.example.luqman.kadesubmission.util.DateTimeUtil
 import org.jetbrains.anko.*
 
 class MatchAdapter(private val events: List<Event>):
-        RecyclerView.Adapter<MatchViewHolder>(){
+        RecyclerView.Adapter<MatchViewHolder>(), Filterable{
+
+    private var filteredEvent: List<Event> = events
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MatchViewHolder {
         return MatchViewHolder(
@@ -30,11 +34,45 @@ class MatchAdapter(private val events: List<Event>):
     }
 
     override fun getItemCount(): Int {
-        return events.size
+        return filteredEvent.size
     }
 
     override fun onBindViewHolder(holder: MatchViewHolder, position: Int) {
-        holder.bindItem(events[position])
+        holder.bindItem(filteredEvent[position])
+    }
+
+    override fun getFilter(): Filter {
+        return object : Filter(){
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val searchQuery = constraint.toString()
+                if(searchQuery.isEmpty()){
+                    filteredEvent = events
+                }else{
+                    val filtered: MutableList<Event> = mutableListOf()
+                    events.forEach {
+                        var homeTeamName = it.homeTeam
+                        homeTeamName = homeTeamName ?: ""
+
+                        var awayTeamName = it.awayTeam
+                        awayTeamName = awayTeamName ?: ""
+
+                        if(homeTeamName.contains(searchQuery, true) || awayTeamName.contains(searchQuery, true) ){
+                            filtered.add(it)
+                        }
+                    }
+                    filteredEvent = filtered
+                }
+                val result = FilterResults()
+                result.values = filteredEvent
+                return result
+            }
+
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                filteredEvent = results?.values as List<Event>
+                notifyDataSetChanged()
+            }
+
+        }
     }
 
 }
