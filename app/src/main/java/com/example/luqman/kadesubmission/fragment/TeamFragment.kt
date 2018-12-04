@@ -85,6 +85,8 @@ class TeamFragment: Fragment(), TeamView{
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 presenter.getTeamList(leagueMap[position])
+                teams.clear()
+                adapter.notifyDataSetChanged()
             }
         }
 
