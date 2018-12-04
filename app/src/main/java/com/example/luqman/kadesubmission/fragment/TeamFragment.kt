@@ -1,15 +1,11 @@
 package com.example.luqman.kadesubmission.fragment
 
+import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.ProgressBar
-import android.widget.Spinner
+import android.view.*
+import android.widget.*
 import com.example.luqman.kadesubmission.R
 import com.example.luqman.kadesubmission.adapter.TeamAdapter
 import com.example.luqman.kadesubmission.api.ApiRepository
@@ -23,6 +19,7 @@ import com.example.luqman.kadesubmission.util.visible
 import com.example.luqman.kadesubmission.view.TeamView
 import com.google.gson.Gson
 import org.jetbrains.anko.AnkoContext
+import org.jetbrains.anko.sdk27.coroutines.onQueryTextListener
 import org.jetbrains.anko.support.v4.find
 
 class TeamFragment: Fragment(), TeamView{
@@ -35,6 +32,11 @@ class TeamFragment: Fragment(), TeamView{
     private lateinit var presenter: TeamPresenter
     private lateinit var progress: ProgressBar
     private lateinit var spinner: Spinner
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -96,6 +98,26 @@ class TeamFragment: Fragment(), TeamView{
         }
         adapter.notifyDataSetChanged()
         EspressoIdlingResource.decrement()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+
+        inflater.inflate(R.menu.search, menu)
+
+        val searchManager = activity?.getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchView: SearchView = menu.findItem(R.id.search).actionView as SearchView
+        searchView.apply {
+            setSearchableInfo(searchManager.getSearchableInfo(activity?.componentName))
+            setIconifiedByDefault(false)
+        }
+
+        searchView.onQueryTextListener {
+            onQueryTextChange {
+                adapter.filter.filter(it)
+                false
+            }
+        }
     }
 
 }

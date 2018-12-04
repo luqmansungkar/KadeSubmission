@@ -4,6 +4,8 @@ import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.luqman.kadesubmission.R
@@ -15,7 +17,10 @@ import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
 
-class TeamAdapter(private val teams: List<Team>): RecyclerView.Adapter<TeamViewHolder>(){
+class TeamAdapter(private var teams: List<Team>): RecyclerView.Adapter<TeamViewHolder>(), Filterable{
+
+    private var filteredTeams: List<Team> = teams
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeamViewHolder {
         return TeamViewHolder(
             TeamRowUI().createView(
@@ -26,11 +31,43 @@ class TeamAdapter(private val teams: List<Team>): RecyclerView.Adapter<TeamViewH
     }
 
     override fun getItemCount(): Int {
-        return teams.size
+        return filteredTeams.size
     }
 
     override fun onBindViewHolder(holder: TeamViewHolder, position: Int) {
-        holder.bindItem(teams[position])
+        holder.bindItem(filteredTeams[position])
+    }
+
+    override fun getFilter(): Filter {
+        return object : Filter(){
+
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val searchQuery = constraint.toString()
+                if(searchQuery.isEmpty()){
+                    filteredTeams = teams
+                }else{
+                    var teamFiltered : MutableList<Team> = mutableListOf()
+                    teams.forEach {
+                        var teamName = it.teamName
+                        teamName = teamName ?: ""
+
+                        if(teamName.contains(searchQuery, true)){
+                            teamFiltered.add(it)
+                        }
+                    }
+                    filteredTeams = teamFiltered
+                }
+                var result = FilterResults()
+                result.values = filteredTeams
+                return result
+            }
+
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                filteredTeams = results?.values as List<Team>
+                notifyDataSetChanged()
+            }
+
+        }
     }
 
 }
