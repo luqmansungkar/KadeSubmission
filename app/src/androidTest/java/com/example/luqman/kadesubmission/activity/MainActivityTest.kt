@@ -209,8 +209,14 @@ class MainActivityTest {
 
     @Test
     fun dataSaveRemoveTest(){
-        onView(withId(R.id.list_event)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(5))
-        onView(withId(R.id.list_event)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(5, click()))
+        onView(allOf(withId(R.id.league_spinner), isDisplayed())).perform(click())
+        onData(allOf(`is`("Spanish La Liga"))).perform(click())
+
+        val visibleListEvent = allOf(withId(R.id.list_event), isDisplayed())
+
+
+        onView(visibleListEvent).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(5))
+        onView(visibleListEvent).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(5, click()))
 
         onView(withId(R.id.add_to_favorite)).perform(click())
         onView(allOf(
@@ -220,8 +226,8 @@ class MainActivityTest {
 
         pressBack()
 
-        onView(withId(R.id.list_event)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(5))
-        onView(withId(R.id.list_event)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(5, click()))
+        onView(visibleListEvent).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(5))
+        onView(visibleListEvent).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(5, click()))
 
         onView(withId(R.id.add_to_favorite)).perform(click())
         onView(allOf(
@@ -231,8 +237,8 @@ class MainActivityTest {
 
         pressBack()
 
-        onView(withId(R.id.list_event)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(5))
-        onView(withId(R.id.list_event)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(5, click()))
+        onView(visibleListEvent).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(5))
+        onView(visibleListEvent).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(5, click()))
 
         onView(withId(R.id.add_to_favorite)).perform(click())
         onView(allOf(
@@ -246,8 +252,13 @@ class MainActivityTest {
 
         onView(withId(R.id.teams)).perform(click())
 
-        onView(withId(R.id.list_event)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(5))
-        onView(withId(R.id.list_event)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(5, click()))
+        onView(allOf(withId(R.id.team_spinner), isDisplayed())).perform(click())
+        onData(allOf(`is`("Spanish La Liga"))).perform(click())
+
+        val visibleListTeam = allOf(withId(R.id.list_team), isDisplayed())
+
+        onView(visibleListTeam).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(5))
+        onView(visibleListTeam).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(5, click()))
 
         onView(withId(R.id.add_to_favorite)).perform(click())
         onView(allOf(
@@ -257,8 +268,8 @@ class MainActivityTest {
 
         pressBack()
 
-        onView(withId(R.id.list_event)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(5))
-        onView(withId(R.id.list_event)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(5, click()))
+        onView(visibleListTeam).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(5))
+        onView(visibleListTeam).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(5, click()))
 
         onView(withId(R.id.add_to_favorite)).perform(click())
         onView(allOf(
@@ -268,8 +279,8 @@ class MainActivityTest {
 
         pressBack()
 
-        onView(withId(R.id.list_event)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(5))
-        onView(withId(R.id.list_event)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(5, click()))
+        onView(visibleListTeam).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(5))
+        onView(visibleListTeam).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(5, click()))
 
         onView(withId(R.id.add_to_favorite)).perform(click())
         onView(allOf(
@@ -277,13 +288,15 @@ class MainActivityTest {
             withText("Added to favorite")
         )).check(matches(isDisplayed()))
 
-        val savedTeamName2 = getText(withId(R.id.match_detail_home_team_name))
+        val savedTeamName2 = getText(withId(R.id.team_detail_name))
 
         pressBack()
 
         onView(withId(R.id.favorites)).perform(click())
 
-        onView(withId(R.id.list_favorite)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
+        val visibleListFavorite = allOf(withId(R.id.list_favorite), isDisplayed())
+
+        onView(visibleListFavorite).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
 
         Assert.assertEquals(savedTeamName1, getText(withId(R.id.match_detail_home_team_name)))
 
@@ -295,9 +308,25 @@ class MainActivityTest {
 
         pressBack()
 
-        onView(withId(R.id.list_favorite)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
+        val teamFavoriteTab = onView(
+            allOf(
+                withContentDescription("TEAMS"),
+                childAtPosition(
+                    childAtPosition(
+                        withId(R.id.tab_match),
+                        0
+                    ),
+                    1
+                ),
+                isDisplayed()
+            )
+        )
 
-        Assert.assertEquals(savedTeamName2, getText(withId(R.id.match_detail_home_team_name)))
+        teamFavoriteTab.perform(click())
+
+        onView(visibleListFavorite).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
+
+        Assert.assertEquals(savedTeamName2, getText(withId(R.id.team_detail_name)))
 
         onView(withId(R.id.add_to_favorite)).perform(click())
         onView(allOf(
