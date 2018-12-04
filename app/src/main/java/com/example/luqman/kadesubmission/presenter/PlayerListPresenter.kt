@@ -20,12 +20,9 @@ class PlayerListPresenter(
         EspressoIdlingResource.increment()
         view.showLoading()
         val url: String = TheSportDBApi.getListPlayersByTeam(teamId)
-        Log.d("simba", url)
 
         GlobalScope.launch(Dispatchers.Main){
             val data = gson.fromJson(apiRepository.doRequest(url).await(), PlayerResponse::class.java)
-
-            Log.d("simba", data.toString())
 
             view.hideLoading()
             view.showPlayerList(data.player)
