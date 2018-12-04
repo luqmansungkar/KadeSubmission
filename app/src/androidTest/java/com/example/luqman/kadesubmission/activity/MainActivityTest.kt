@@ -153,6 +153,61 @@ class MainActivityTest {
     }
 
     @Test
+    fun teamFragmentTest(){
+        val bottomNavigationItemView = onView(
+            allOf(
+                withId(R.id.teams),
+                isDisplayed()
+            )
+        )
+        bottomNavigationItemView.perform(click())
+
+        onView(allOf(withId(R.id.team_spinner), isDisplayed())).perform(click())
+        onData(allOf(`is`("Spanish La Liga"))).perform(click())
+
+        val visibleListTeam = allOf(withId(R.id.list_team), isDisplayed())
+
+        onView(visibleListTeam).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(3))
+        onView(visibleListTeam).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(3, click()))
+
+        onView(withId(R.id.team_detail_logo)).check(matches(isDisplayed()))
+        onView(withId(R.id.team_detail_stadium)).check(matches(isDisplayed()))
+
+        onView(withId(R.id.team_overview_desc)).check(matches(isDisplayed()))
+
+        val playerListTab = onView(
+            allOf(
+                withContentDescription("PLAYERS"),
+                childAtPosition(
+                    childAtPosition(
+                        withId(R.id.team_detail_tab),
+                        0
+                    ),
+                    1
+                ),
+                isDisplayed()
+            )
+        )
+
+        playerListTab.perform(click())
+
+        val visibleListPlayer = allOf(withId(R.id.list_player), isDisplayed())
+
+        onView(visibleListPlayer).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(3))
+        onView(visibleListPlayer).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(3, click()))
+
+        onView(withId(R.id.player_weight)).check(matches(allOf(isDisplayed(), withText(not("")))))
+
+        pressBack()
+
+        onView(visibleListPlayer).check(matches(isDisplayed()))
+
+        pressBack()
+
+        onView(visibleListTeam).check(matches(isDisplayed()))
+    }
+
+    @Test
     fun dataSaveRemoveTest(){
         onView(withId(R.id.list_event)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(5))
         onView(withId(R.id.list_event)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(5, click()))
