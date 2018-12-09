@@ -1,7 +1,7 @@
 package com.example.luqman.kadesubmission.activity
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.ProgressBar

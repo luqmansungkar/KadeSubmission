@@ -11,7 +11,7 @@ object TheSportDBApi{
             .appendPath("v1")
             .appendPath("json")
             .appendPath(BuildConfig.TSDB_API_KEY)
-            .appendPath(path+".php")
+            .appendPath("$path.php")
 
         if(paramKey != null && paramValue != null) url.appendQueryParameter(paramKey, paramValue)
 

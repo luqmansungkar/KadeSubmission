@@ -6,7 +6,7 @@ import android.support.test.espresso.idling.CountingIdlingResource
 
 object EspressoIdlingResource {
 
-    private val RESOURCE = "GLOBAL"
+    private const val RESOURCE = "GLOBAL"
 
     private val mCountingIdlingResource = CountingIdlingResource(RESOURCE)
 

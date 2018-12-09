@@ -56,9 +56,9 @@ class MainActivityTest {
         onView(visibleListEvent).check(matches(isDisplayed()))
 
         onView(visibleListEvent).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(10))
-        var match_date = mActivityTestRule.activity.find<TextView>(R.id.match_date).text.toString()
+        var matchDate = mActivityTestRule.activity.find<TextView>(R.id.match_date).text.toString()
 
-        Assert.assertNotEquals(match_date, "")
+        Assert.assertNotEquals(matchDate, "")
 
         onView(visibleListEvent).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(10))
         onView(visibleListEvent).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(10, click()))

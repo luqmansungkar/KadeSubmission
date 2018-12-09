@@ -41,12 +41,10 @@ class PlayerViewHolder(view: View, val context: Context): RecyclerView.ViewHolde
     private val playerPosition: TextView = view.find(R.id.player_row_position)
 
     fun bindItem(player: Player){
-        if(player.playerCutout != null){
-            Picasso.get().load(player.playerCutout).into(playerCutout)
-        }else if(player.playerThumb != null){
-            Picasso.get().load(player.playerThumb).into(playerCutout)
-        }else{
-            Picasso.get().load("https://style.anu.edu.au/_anu/4/images/placeholders/person.png").into(playerCutout)
+        when {
+            player.playerCutout != null -> Picasso.get().load(player.playerCutout).into(playerCutout)
+            player.playerThumb != null -> Picasso.get().load(player.playerThumb).into(playerCutout)
+            else -> Picasso.get().load("https://style.anu.edu.au/_anu/4/images/placeholders/person.png").into(playerCutout)
         }
         playerName.text = player.playerName
         playerPosition.text = player.playerPosition
