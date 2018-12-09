@@ -21,12 +21,17 @@ class MatchDetailUI: AnkoComponent<MatchDetailActivity>{
 
                 textView {
                     textAlignment = View.TEXT_ALIGNMENT_CENTER
-                    padding = dip(16)
                     id = R.id.match_detail_date
                     typeface = Typeface.DEFAULT_BOLD
                     textSize = sp(7f).toFloat()
                 }.lparams(matchParent, wrapContent){
-                    bottomMargin = dip(10)
+                }
+
+                textView {
+                    textAlignment = View.TEXT_ALIGNMENT_CENTER
+                    id = R.id.match_detail_time
+                }.lparams(matchParent, wrapContent){
+                    bottomMargin = dip(20)
                 }
 
                 linearLayout {

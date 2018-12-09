@@ -43,4 +43,5 @@
     <item name="list_player" type="id"/>
     <item name="list_player_progress_bar" type="id"/>
     <item name="match_time" type="id"/>
+    <item name="match_detail_time" type="id"/>
 </resources>

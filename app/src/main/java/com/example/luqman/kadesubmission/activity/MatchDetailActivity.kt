@@ -23,6 +23,7 @@ import com.example.luqman.kadesubmission.model.Favorite
 import com.example.luqman.kadesubmission.model.Team
 import com.example.luqman.kadesubmission.presenter.MatchDetailPresenter
 import com.example.luqman.kadesubmission.ui.MatchDetailUI
+import com.example.luqman.kadesubmission.util.DateTimeUtil
 import com.example.luqman.kadesubmission.util.EspressoIdlingResource
 import com.example.luqman.kadesubmission.util.invisible
 import com.example.luqman.kadesubmission.util.visible
@@ -45,6 +46,7 @@ class MatchDetailActivity: AppCompatActivity(), DetailView {
     private lateinit var match: Event
 
     private lateinit var matchDate: TextView
+    private lateinit var matchTime: TextView
     private lateinit var homeImage: ImageView
     private lateinit var homeTeamName: TextView
     private lateinit var homeScore: TextView
@@ -78,6 +80,7 @@ class MatchDetailActivity: AppCompatActivity(), DetailView {
         MatchDetailUI().setContentView(this)
 
         matchDate = find(R.id.match_detail_date)
+        matchTime = find(R.id.match_detail_time)
         homeImage = find(R.id.match_detail_home_image)
         homeTeamName = find(R.id.match_detail_home_team_name)
         homeScore = find(R.id.match_detail_home_score)
@@ -134,7 +137,15 @@ class MatchDetailActivity: AppCompatActivity(), DetailView {
     override fun showMatchDetail(match: Event) {
 
         this.match = match
-        matchDate.text = match.matchDate
+
+        val sourceDateTimeString = match.matchDate+" "+match.matchTime
+        val sourceDateTimeFormat = "yyyy-MM-dd HH:mm:ssZZ"
+
+        val dateString: String = DateTimeUtil.formatDateTime(sourceDateTimeString, sourceDateTimeFormat, "EEE, dd MMM yyyy")
+        val timeString: String = DateTimeUtil.formatDateTime(sourceDateTimeString, sourceDateTimeFormat, "HH:mm")
+
+        matchDate.text = dateString
+        matchTime.text = timeString
         homeTeamName.text = match.homeTeam
         awayTeamName.text = match.awayTeam
 
