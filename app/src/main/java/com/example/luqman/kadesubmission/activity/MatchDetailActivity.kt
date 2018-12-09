@@ -1,6 +1,5 @@
 package com.example.luqman.kadesubmission.activity
 
-import android.database.sqlite.SQLiteConstraintException
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -19,22 +18,19 @@ import android.widget.TextView
 import com.example.luqman.kadesubmission.R
 import com.example.luqman.kadesubmission.api.ApiRepository
 import com.example.luqman.kadesubmission.database.database
-import com.example.luqman.kadesubmission.view.DetailView
-import com.example.luqman.kadesubmission.presenter.MatchDetailPresenter
 import com.example.luqman.kadesubmission.model.Event
 import com.example.luqman.kadesubmission.model.Favorite
 import com.example.luqman.kadesubmission.model.Team
+import com.example.luqman.kadesubmission.presenter.MatchDetailPresenter
 import com.example.luqman.kadesubmission.ui.MatchDetailUI
 import com.example.luqman.kadesubmission.util.EspressoIdlingResource
 import com.example.luqman.kadesubmission.util.invisible
 import com.example.luqman.kadesubmission.util.visible
+import com.example.luqman.kadesubmission.view.DetailView
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import org.jetbrains.anko.db.classParser
-import org.jetbrains.anko.db.delete
-import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
-import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.find
 import org.jetbrains.anko.setContentView
 import org.jetbrains.anko.toast
@@ -107,7 +103,7 @@ class MatchDetailActivity: AppCompatActivity(), DetailView {
 
         val request = ApiRepository()
         val gson = Gson()
-        presenter = MatchDetailPresenter(this, request, gson)
+        presenter = MatchDetailPresenter(this, request, gson, database, scrollView)
 
         presenter.getMatchDetails(matchId)
     }
@@ -191,7 +187,7 @@ class MatchDetailActivity: AppCompatActivity(), DetailView {
             }
             R.id.add_to_favorite -> {
                 if(this::match.isInitialized){
-                    if(isFavorite) removeFromFavorite() else addToFavorite()
+                    if(isFavorite) presenter.removeFromFavorite(match) else presenter.addToFavorite(match)
 
                     isFavorite = !isFavorite
                     setFavorite()
@@ -201,36 +197,6 @@ class MatchDetailActivity: AppCompatActivity(), DetailView {
                 true
             }
             else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    private fun addToFavorite(){
-        try {
-            database.use {
-                insert(Favorite.TABLE_FAVORITE,
-                    Favorite.MATCH_ID to match.eventId,
-                    Favorite.MATCH_DATE to match.matchDate,
-                    Favorite.MATCH_TIME to match.matchTime,
-                    Favorite.HOME_TEAM_NAME to match.homeTeam,
-                    Favorite.HOME_TEAM_SCORE to match.homeScore,
-                    Favorite.AWAY_TEAM_NAME to match.awayTeam,
-                    Favorite.AWAY_TEAM_SCORE to match.awayScore
-                    )
-            }
-            scrollView.snackbar("Added to favorite").show()
-        }catch (e: SQLiteConstraintException){
-            scrollView.snackbar(e.localizedMessage).show()
-        }
-    }
-
-    private fun removeFromFavorite(){
-        try {
-            database.use {
-                delete(Favorite.TABLE_FAVORITE, "(MATCH_ID = {id})", "id" to match.eventId.toString())
-            }
-            scrollView.snackbar("Removed from favorite").show()
-        }catch (e: SQLiteConstraintException){
-            scrollView.snackbar(e.localizedMessage).show()
         }
     }
 

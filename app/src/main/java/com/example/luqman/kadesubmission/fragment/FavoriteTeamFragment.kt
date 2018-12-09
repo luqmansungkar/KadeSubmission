@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.luqman.kadesubmission.R
 import com.example.luqman.kadesubmission.adapter.FavoriteTeamAdapter
-import com.example.luqman.kadesubmission.database.favoriteTeamDatabase
+import com.example.luqman.kadesubmission.database.database
 import com.example.luqman.kadesubmission.model.FavoriteTeam
 import com.example.luqman.kadesubmission.ui.FavoriteListUI
 import org.jetbrains.anko.AnkoContext
@@ -41,7 +41,7 @@ class FavoriteTeamFragment: Fragment(){
 
     private fun showFavorite(){
         favorites.clear()
-        context?.favoriteTeamDatabase?.use {
+        context?.database?.use {
             val result = select(FavoriteTeam.FAVORITE_TEAM_TABLE)
             val favorite = result.parseList(classParser<FavoriteTeam>())
             favorites.addAll(favorite)

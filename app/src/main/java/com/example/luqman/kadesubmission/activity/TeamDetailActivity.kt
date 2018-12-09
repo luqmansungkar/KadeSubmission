@@ -1,6 +1,5 @@
 package com.example.luqman.kadesubmission.activity
 
-import android.database.sqlite.SQLiteConstraintException
 import android.os.Bundle
 import android.support.design.widget.CoordinatorLayout
 import android.support.v4.content.ContextCompat
@@ -12,7 +11,7 @@ import android.widget.TextView
 import com.example.luqman.kadesubmission.R
 import com.example.luqman.kadesubmission.adapter.TeamDetailPagerAdapter
 import com.example.luqman.kadesubmission.api.ApiRepository
-import com.example.luqman.kadesubmission.database.favoriteTeamDatabase
+import com.example.luqman.kadesubmission.database.database
 import com.example.luqman.kadesubmission.model.FavoriteTeam
 import com.example.luqman.kadesubmission.model.Team
 import com.example.luqman.kadesubmission.presenter.TeamDetailPresenter
@@ -22,10 +21,7 @@ import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.team_detail.*
 import org.jetbrains.anko.db.classParser
-import org.jetbrains.anko.db.delete
-import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
-import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.find
 import org.jetbrains.anko.toast
 
@@ -62,7 +58,7 @@ class TeamDetailActivity: AppCompatActivity(), TeamDetailView{
         val request = ApiRepository()
         val gson = Gson()
 
-        presenter = TeamDetailPresenter(this, request, gson)
+        presenter = TeamDetailPresenter(this, request, gson, database, coordinatorLayout)
 
         presenter.getTeamDetails(teamId)
         val fragmentAdapter = TeamDetailPagerAdapter(supportFragmentManager, teamId)
@@ -87,7 +83,7 @@ class TeamDetailActivity: AppCompatActivity(), TeamDetailView{
             }
             R.id.add_to_favorite -> {
                 if (this::team.isInitialized){
-                    if(isFavorite) removeFromFavorite() else addToFavorite()
+                    if(isFavorite) presenter.removeFromFavorite(team) else presenter.addToFavorite(team)
 
                     isFavorite = !isFavorite
                     setFavoriteIcon()
@@ -116,7 +112,7 @@ class TeamDetailActivity: AppCompatActivity(), TeamDetailView{
     }
 
     private fun favoriteState(){
-        favoriteTeamDatabase.use {
+        database.use {
             val result = select(FavoriteTeam.FAVORITE_TEAM_TABLE).whereArgs(FavoriteTeam.TEAM_ID+" = {id}", "id" to teamId)
             val favorite = result.parseList(classParser<FavoriteTeam>())
             if(! favorite.isEmpty()){
@@ -130,31 +126,6 @@ class TeamDetailActivity: AppCompatActivity(), TeamDetailView{
             menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_added_to_favorites)
         }else{
             menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_add_to_favorites)
-        }
-    }
-
-    private fun addToFavorite(){
-        try {
-            favoriteTeamDatabase.use {
-                insert(FavoriteTeam.FAVORITE_TEAM_TABLE,
-                    FavoriteTeam.TEAM_ID to teamId,
-                    FavoriteTeam.TEAM_NAME to team.teamName,
-                    FavoriteTeam.TEAM_BADGE to team.teamBadge)
-            }
-            coordinatorLayout.snackbar("Added to favorite").show()
-        }catch (e: SQLiteConstraintException){
-            coordinatorLayout.snackbar(e.localizedMessage).show()
-        }
-    }
-
-    private fun removeFromFavorite(){
-        try {
-            favoriteTeamDatabase.use {
-                delete(FavoriteTeam.FAVORITE_TEAM_TABLE, FavoriteTeam.TEAM_ID+" = {id}", "id" to teamId)
-            }
-            coordinatorLayout.snackbar("Removed from favorite").show()
-        }catch (e: SQLiteConstraintException){
-            coordinatorLayout.snackbar(e.localizedMessage).show()
         }
     }
 }

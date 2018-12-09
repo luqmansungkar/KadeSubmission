@@ -30,7 +30,7 @@ class TeamOverviewFragment: Fragment(), AnkoComponent<Context>, TeamDetailView{
         val request = ApiRepository()
         val gson = Gson()
 
-        val presenter = TeamDetailPresenter(this, request, gson)
+        val presenter = TeamDetailPresenter(this, request, gson, null, null)
         val teamId: String = if (arguments?.get("team_id") != null) arguments?.get("team_id").toString() else "0"
         presenter.getTeamDetails(teamId)
     }
