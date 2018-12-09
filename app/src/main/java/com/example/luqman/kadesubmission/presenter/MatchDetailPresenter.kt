@@ -24,8 +24,8 @@ class MatchDetailPresenter(
     private val view: DetailView,
     private val apiRepository: ApiRepository,
     private val gson: Gson,
-    private val database: MyDatabaseOpenHelper,
-    private val snackbarView: View
+    private val database: MyDatabaseOpenHelper?,
+    private val snackbarView: View?
 ){
 
 
@@ -58,7 +58,7 @@ class MatchDetailPresenter(
 
     fun addToFavorite(match: Event){
         try {
-            database.use {
+            database?.use {
                 insert(Favorite.TABLE_FAVORITE,
                     Favorite.MATCH_ID to match.eventId,
                     Favorite.MATCH_DATE to match.matchDate,
@@ -69,20 +69,20 @@ class MatchDetailPresenter(
                     Favorite.AWAY_TEAM_SCORE to match.awayScore
                 )
             }
-            snackbarView.snackbar("Added to favorite").show()
+            snackbarView?.snackbar("Added to favorite")?.show()
         }catch (e: SQLiteConstraintException){
-            snackbarView.snackbar(e.localizedMessage).show()
+            snackbarView?.snackbar(e.localizedMessage)?.show()
         }
     }
 
     fun removeFromFavorite(match: Event){
         try {
-            database.use {
+            database?.use {
                 delete(Favorite.TABLE_FAVORITE, "(MATCH_ID = {id})", "id" to match.eventId.toString())
             }
-            snackbarView.snackbar("Removed from favorite").show()
+            snackbarView?.snackbar("Removed from favorite")?.show()
         }catch (e: SQLiteConstraintException){
-            snackbarView.snackbar(e.localizedMessage).show()
+            snackbarView?.snackbar(e.localizedMessage)?.show()
         }
     }
 }
