@@ -12,48 +12,58 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class MatchPresenter(
-    private val view: MatchView,
     private val apiRepository: ApiRepository,
     private val gson: Gson
 ){
 
+    private var view: MatchView? = null
+
+    fun onAttach(view: MatchView){
+        this.view = view
+    }
+
+    fun onDetach(){
+        view = null
+    }
+
     fun getLeagueList(){
         EspressoIdlingResource.increment()
-        view.showLoading()
+        view?.showLoading()
         val url: String = TheSportDBApi.getListAllLeagues()
 
         GlobalScope.launch(Dispatchers.Main){
             val data = gson.fromJson(apiRepository.doRequest(url).await(), LeagueResponse::class.java)
 
-            view.hideLoading()
-            view.showLeagueList(data.countrys)
+
+            view?.hideLoading()
+            view?.showLeagueList(data.countrys)
         }
     }
 
     fun getPastMatchList(leagueId: String?){
         EspressoIdlingResource.increment()
-        view.showLoading()
+        view?.showLoading()
         val url: String = TheSportDBApi.getPastMatches(leagueId)
 
         GlobalScope.launch(Dispatchers.Main){
             val data = gson.fromJson(apiRepository.doRequest(url).await(), MatchResponse::class.java)
 
-            view.hideLoading()
-            view.showMatchList(data.events)
+            view?.hideLoading()
+            view?.showMatchList(data.events)
         }
 
     }
 
     fun getNextMatchList(leagueId: String?){
         EspressoIdlingResource.increment()
-        view.showLoading()
+        view?.showLoading()
         val url: String = TheSportDBApi.getNextMatches(leagueId)
 
         GlobalScope.launch(Dispatchers.Main){
             val data = gson.fromJson(apiRepository.doRequest(url).await(), MatchResponse::class.java)
 
-            view.hideLoading()
-            view.showMatchList(data.events)
+            view?.hideLoading()
+            view?.showMatchList(data.events)
         }
 
     }

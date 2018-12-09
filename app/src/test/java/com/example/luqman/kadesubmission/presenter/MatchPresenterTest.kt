@@ -31,7 +31,8 @@ class MatchPresenterTest {
     @Before
     fun setUp(){
         MockitoAnnotations.initMocks(this)
-        presenter = MatchPresenter(view, apiRepository, gson)
+        presenter = MatchPresenter(apiRepository, gson)
+        presenter.onAttach(view)
     }
 
     @Test

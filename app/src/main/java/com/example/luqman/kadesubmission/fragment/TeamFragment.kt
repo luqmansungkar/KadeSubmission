@@ -45,7 +45,7 @@ class TeamFragment: Fragment(), TeamView{
 
         val request = ApiRepository()
         val gson = Gson()
-        presenter = TeamPresenter(this, request, gson)
+        presenter = TeamPresenter(request, gson)
 
         return view
     }
@@ -53,7 +53,13 @@ class TeamFragment: Fragment(), TeamView{
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         progress = find(R.id.team_progress_bar)
+        presenter.onAttach(this)
         presenter.getLeagueList()
+    }
+
+    override fun onDestroyView() {
+        presenter.onDettach()
+        super.onDestroyView()
     }
 
     override fun showLoading() {

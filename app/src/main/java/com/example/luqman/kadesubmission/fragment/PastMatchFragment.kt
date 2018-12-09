@@ -49,7 +49,7 @@ class PastMatchFragment : Fragment(), MatchView {
 
         val request = ApiRepository()
         val gson = Gson()
-        presenter = MatchPresenter(this, request, gson)
+        presenter = MatchPresenter(request, gson)
 
         return view
     }
@@ -57,8 +57,14 @@ class PastMatchFragment : Fragment(), MatchView {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         progress = find(R.id.main_progress_bar)
+        presenter.onAttach(this)
         presenter.getLeagueList()
 
+    }
+
+    override fun onDestroyView() {
+        presenter.onDetach()
+        super.onDestroyView()
     }
 
     override fun showLoading() {
