@@ -3,9 +3,11 @@ package com.example.luqman.kadesubmission.fragment
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.ProgressBar
 import com.example.luqman.kadesubmission.R
 import com.example.luqman.kadesubmission.adapter.PlayerAdapter
@@ -28,6 +30,8 @@ class PlayerListFragment: Fragment(), PlayerListView{
     private lateinit var adapter: PlayerAdapter
     private lateinit var presenter: PlayerListPresenter
     private lateinit var progressBar: ProgressBar
+    private lateinit var empty: LinearLayout
+    private lateinit var list: RecyclerView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -47,6 +51,8 @@ class PlayerListFragment: Fragment(), PlayerListView{
         val teamId: String = if (arguments?.get("team_id") != null) arguments?.get("team_id").toString() else "0"
 
         progressBar = find(R.id.list_player_progress_bar)
+        empty = find(R.id.player_empty_view)
+        list = find(R.id.list_player)
         presenter.getPlayerList(teamId)
 
     }
@@ -63,6 +69,14 @@ class PlayerListFragment: Fragment(), PlayerListView{
         this.players.clear()
         if(players != null){
             this.players.addAll(players)
+
+            if (players.isEmpty()){
+                empty.visible()
+                list.invisible()
+            }else{
+                empty.invisible()
+                list.visible()
+            }
         }
         adapter.notifyDataSetChanged()
         EspressoIdlingResource.decrement()

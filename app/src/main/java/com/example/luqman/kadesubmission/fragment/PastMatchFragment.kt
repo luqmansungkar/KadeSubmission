@@ -5,6 +5,7 @@ import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.RecyclerView
 import android.view.*
 import android.widget.*
 import com.example.luqman.kadesubmission.R
@@ -31,6 +32,8 @@ class PastMatchFragment : Fragment(), MatchView {
     private lateinit var presenter: MatchPresenter
     private lateinit var progress: ProgressBar
     private lateinit var spinner: Spinner
+    private lateinit var empty: LinearLayout
+    private lateinit var list: RecyclerView
     private var leagues: MutableList<Leagues> = mutableListOf()
     private var leagueMap: HashMap<Int, String?> = HashMap()
 
@@ -57,6 +60,8 @@ class PastMatchFragment : Fragment(), MatchView {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         progress = find(R.id.main_progress_bar)
+        empty = find(R.id.match_empty_view)
+        list = find(R.id.list_event)
         presenter.onAttach(this)
         presenter.getLeagueList()
 
@@ -69,15 +74,26 @@ class PastMatchFragment : Fragment(), MatchView {
 
     override fun showLoading() {
         progress.visible()
+        empty.invisible()
+        list.invisible()
     }
 
     override fun hideLoading() {
         progress.invisible()
+        empty.visible()
+        list.visible()
     }
 
     override fun showLeagueList(leagues: List<Leagues>) {
         this.leagues.clear()
         this.leagues.addAll(leagues)
+        if (leagues.isEmpty()){
+            empty.visible()
+            list.invisible()
+        }else{
+            empty.invisible()
+            list.visible()
+        }
 
         spinner = find(R.id.league_spinner)
 

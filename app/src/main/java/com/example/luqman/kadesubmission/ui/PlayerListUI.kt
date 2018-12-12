@@ -29,6 +29,21 @@ class PlayerListUI(var playerAdapter: PlayerAdapter): AnkoComponent<Fragment>{
                         id = R.id.list_player
                     }
 
+                    linearLayout {
+                        id = R.id.player_empty_view
+                        lparams(matchParent, matchParent)
+                        orientation = LinearLayout.VERTICAL
+                        imageView {
+                            setImageResource(R.drawable.ic_sentiment_dissatisfied_black_24dp)
+                        }.lparams(dip(200), dip(200)){
+                            gravity = Gravity.CENTER
+                        }
+                        textView {
+                            gravity = Gravity.CENTER
+                            text = context.getString(R.string.empty_list_string)
+                        }.lparams(matchParent, wrapContent)
+                    }
+
                     progressBar {
                         id = R.id.list_player_progress_bar
                     }.lparams{
