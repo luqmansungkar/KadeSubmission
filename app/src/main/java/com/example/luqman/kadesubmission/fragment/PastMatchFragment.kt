@@ -73,14 +73,10 @@ class PastMatchFragment : Fragment(), MatchView {
 
     override fun showLoading() {
         progress.visible()
-        empty.invisible()
-        list.invisible()
     }
 
     override fun hideLoading() {
         progress.invisible()
-        empty.visible()
-        list.visible()
     }
 
     override fun showLeagueList(leagues: List<Leagues>) {
