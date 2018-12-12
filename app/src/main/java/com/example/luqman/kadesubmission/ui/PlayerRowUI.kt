@@ -7,9 +7,9 @@ import android.widget.LinearLayout
 import com.example.luqman.kadesubmission.R
 import org.jetbrains.anko.*
 
-class PlayerRowUI: AnkoComponent<ViewGroup>{
+class PlayerRowUI : AnkoComponent<ViewGroup> {
     override fun createView(ui: AnkoContext<ViewGroup>): View {
-        return with(ui){
+        return with(ui) {
             linearLayout {
                 lparams(matchParent, wrapContent)
                 padding = dip(16)
@@ -17,7 +17,7 @@ class PlayerRowUI: AnkoComponent<ViewGroup>{
 
                 imageView {
                     id = R.id.player_row_cutout
-                }.lparams{
+                }.lparams {
                     height = dip(50)
                     width = dip(50)
                 }
@@ -25,7 +25,7 @@ class PlayerRowUI: AnkoComponent<ViewGroup>{
                 textView {
                     id = R.id.player_row_name
                     textSize = 16f
-                }.lparams{
+                }.lparams {
                     margin = dip(15)
                     weight = 1f
                 }
@@ -35,7 +35,7 @@ class PlayerRowUI: AnkoComponent<ViewGroup>{
                     textSize = 16f
                     textAlignment = View.TEXT_ALIGNMENT_TEXT_END
                     textColor = Color.GRAY
-                }.lparams{
+                }.lparams {
                     margin = dip(15)
                     weight = 1f
                 }

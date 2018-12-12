@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter
 import com.example.luqman.kadesubmission.fragment.NextMatchFragment
 import com.example.luqman.kadesubmission.fragment.PastMatchFragment
 
-class MatchPagerAdapter(fm: FragmentManager): FragmentPagerAdapter(fm){
+class MatchPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     private val pages = listOf<Fragment>(
         PastMatchFragment(),
@@ -22,7 +22,7 @@ class MatchPagerAdapter(fm: FragmentManager): FragmentPagerAdapter(fm){
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
-        return when(position){
+        return when (position) {
             0 -> "Past Match"
             1 -> "Next Match"
             else -> "Opo iki"

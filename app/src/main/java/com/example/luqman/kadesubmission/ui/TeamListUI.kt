@@ -9,12 +9,12 @@ import com.example.luqman.kadesubmission.adapter.TeamAdapter
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 
-class TeamListUI(val teamAdapter: TeamAdapter): AnkoComponent<Fragment>{
-    override fun createView(ui: AnkoContext<Fragment>) = with(ui){
+class TeamListUI(val teamAdapter: TeamAdapter) : AnkoComponent<Fragment> {
+    override fun createView(ui: AnkoContext<Fragment>) = with(ui) {
         linearLayout {
-            spinner{
+            spinner {
                 id = R.id.team_spinner
-            }.lparams(matchParent, wrapContent){
+            }.lparams(matchParent, wrapContent) {
                 bottomMargin = dip(15)
             }
 
@@ -31,7 +31,7 @@ class TeamListUI(val teamAdapter: TeamAdapter): AnkoComponent<Fragment>{
 
             progressBar {
                 id = R.id.team_progress_bar
-            }.lparams{
+            }.lparams {
                 gravity = Gravity.CENTER
             }
         }

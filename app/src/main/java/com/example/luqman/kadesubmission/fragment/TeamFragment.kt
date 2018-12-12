@@ -22,7 +22,7 @@ import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.sdk27.coroutines.onQueryTextListener
 import org.jetbrains.anko.support.v4.find
 
-class TeamFragment: Fragment(), TeamView{
+class TeamFragment : Fragment(), TeamView {
 
     private var teams: MutableList<Team> = mutableListOf()
     private var leagues: MutableList<Leagues> = mutableListOf()
@@ -77,16 +77,20 @@ class TeamFragment: Fragment(), TeamView{
         spinner = find(R.id.team_spinner)
 
         val leagueArray = arrayOfNulls<String>(leagues.size)
-        for(index in leagues.indices){
+        for (index in leagues.indices) {
             leagueArray[index] = leagues[index].leagueName
             leagueMap[index] = leagues[index].leagueId
         }
 
-        val spinnerAdapter = ArrayAdapter(this@TeamFragment.context as Context, android.R.layout.simple_spinner_dropdown_item, leagueArray)
+        val spinnerAdapter = ArrayAdapter(
+            this@TeamFragment.context as Context,
+            android.R.layout.simple_spinner_dropdown_item,
+            leagueArray
+        )
 
         spinner.adapter = spinnerAdapter
 
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -101,7 +105,7 @@ class TeamFragment: Fragment(), TeamView{
 
     override fun showTeamList(teams: List<Team>?) {
         this.teams.clear()
-        if(teams != null){
+        if (teams != null) {
             this.teams.addAll(teams)
         }
         adapter.notifyDataSetChanged()

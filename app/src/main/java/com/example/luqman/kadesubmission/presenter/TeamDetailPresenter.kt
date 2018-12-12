@@ -24,13 +24,13 @@ class TeamDetailPresenter(
     private val gson: Gson,
     private val database: MyDatabaseOpenHelper?,
     private val snacbarView: View?
-){
-    fun getTeamDetails(teamId: String?){
+) {
+    fun getTeamDetails(teamId: String?) {
         EspressoIdlingResource.increment()
         view.showLoading()
         var url: String = TheSportDBApi.getTeamDetails(teamId)
 
-        GlobalScope.launch(Dispatchers.Main){
+        GlobalScope.launch(Dispatchers.Main) {
             val data = gson.fromJson(apiRepository.doRequest(url).await(), TeamResponse::class.java)
 
             view.hideLoading()
@@ -38,28 +38,33 @@ class TeamDetailPresenter(
         }
     }
 
-    fun addToFavorite(team: Team){
+    fun addToFavorite(team: Team) {
         try {
             database?.use {
                 insert(
                     FavoriteTeam.FAVORITE_TEAM_TABLE,
                     FavoriteTeam.TEAM_ID to team.teamId,
                     FavoriteTeam.TEAM_NAME to team.teamName,
-                    FavoriteTeam.TEAM_BADGE to team.teamBadge)
+                    FavoriteTeam.TEAM_BADGE to team.teamBadge
+                )
             }
             snacbarView?.snackbar("Added to favorite")?.show()
-        }catch (e: SQLiteConstraintException){
+        } catch (e: SQLiteConstraintException) {
             snacbarView?.snackbar(e.localizedMessage)?.show()
         }
     }
 
-    fun removeFromFavorite(team: Team){
+    fun removeFromFavorite(team: Team) {
         try {
             database?.use {
-                delete(FavoriteTeam.FAVORITE_TEAM_TABLE, FavoriteTeam.TEAM_ID+" = {id}", "id" to team.teamId.toString())
+                delete(
+                    FavoriteTeam.FAVORITE_TEAM_TABLE,
+                    FavoriteTeam.TEAM_ID + " = {id}",
+                    "id" to team.teamId.toString()
+                )
             }
             snacbarView?.snackbar("Removed from favorite")?.show()
-        }catch (e: SQLiteConstraintException){
+        } catch (e: SQLiteConstraintException) {
             snacbarView?.snackbar(e.localizedMessage)?.show()
         }
     }

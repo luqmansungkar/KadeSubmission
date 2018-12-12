@@ -1,6 +1,5 @@
 package com.example.luqman.kadesubmission.presenter
 
-import android.util.Log
 import com.example.luqman.kadesubmission.api.ApiRepository
 import com.example.luqman.kadesubmission.api.TheSportDBApi
 import com.example.luqman.kadesubmission.model.PlayerResponse
@@ -15,13 +14,13 @@ class PlayerListPresenter(
     private val view: PlayerListView,
     private val apiRepository: ApiRepository,
     private val gson: Gson
-){
-    fun getPlayerList(teamId: String){
+) {
+    fun getPlayerList(teamId: String) {
         EspressoIdlingResource.increment()
         view.showLoading()
         val url: String = TheSportDBApi.getListPlayersByTeam(teamId)
 
-        GlobalScope.launch(Dispatchers.Main){
+        GlobalScope.launch(Dispatchers.Main) {
             val data = gson.fromJson(apiRepository.doRequest(url).await(), PlayerResponse::class.java)
 
             view.hideLoading()

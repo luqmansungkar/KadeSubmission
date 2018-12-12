@@ -7,10 +7,9 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.example.luqman.kadesubmission.R
-import com.example.luqman.kadesubmission.database.database
 import com.example.luqman.kadesubmission.adapter.FavoriteMatchAdapter
+import com.example.luqman.kadesubmission.database.database
 import com.example.luqman.kadesubmission.model.Favorite
 import com.example.luqman.kadesubmission.ui.FavoriteListUI
 import org.jetbrains.anko.AnkoContext
@@ -44,7 +43,7 @@ class FavoriteMatchFragment : Fragment() {
         showFavorite()
     }
 
-    private fun showFavorite(){
+    private fun showFavorite() {
         favorites.clear()
         context?.database?.use {
             val result = select(Favorite.TABLE_FAVORITE)

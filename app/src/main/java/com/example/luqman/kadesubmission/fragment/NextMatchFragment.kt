@@ -8,17 +8,16 @@ import android.support.v4.app.Fragment
 import android.view.*
 import android.widget.*
 import com.example.luqman.kadesubmission.R
-
-import com.example.luqman.kadesubmission.api.ApiRepository
-import com.example.luqman.kadesubmission.presenter.MatchPresenter
-import com.example.luqman.kadesubmission.view.MatchView
 import com.example.luqman.kadesubmission.adapter.MatchAdapter
+import com.example.luqman.kadesubmission.api.ApiRepository
 import com.example.luqman.kadesubmission.model.Event
 import com.example.luqman.kadesubmission.model.Leagues
+import com.example.luqman.kadesubmission.presenter.MatchPresenter
 import com.example.luqman.kadesubmission.ui.MatchListUI
 import com.example.luqman.kadesubmission.util.EspressoIdlingResource
 import com.example.luqman.kadesubmission.util.invisible
 import com.example.luqman.kadesubmission.util.visible
+import com.example.luqman.kadesubmission.view.MatchView
 import com.google.gson.Gson
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.sdk27.coroutines.onQueryTextListener
@@ -81,16 +80,20 @@ class NextMatchFragment : Fragment(), MatchView {
         spinner = find(R.id.league_spinner)
 
         val leagueArray = arrayOfNulls<String>(leagues.size)
-        for(index in leagues.indices){
+        for (index in leagues.indices) {
             leagueArray[index] = leagues[index].leagueName
             leagueMap[index] = leagues[index].leagueId
         }
 
-        val spinnerAdapter = ArrayAdapter(this@NextMatchFragment.context as Context, android.R.layout.simple_spinner_dropdown_item, leagueArray)
+        val spinnerAdapter = ArrayAdapter(
+            this@NextMatchFragment.context as Context,
+            android.R.layout.simple_spinner_dropdown_item,
+            leagueArray
+        )
 
         spinner.adapter = spinnerAdapter
 
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -105,7 +108,7 @@ class NextMatchFragment : Fragment(), MatchView {
 
     override fun showMatchList(data: List<Event>?) {
         events.clear()
-        if(data != null){
+        if (data != null) {
             events.addAll(data)
         }
         adapter.notifyDataSetChanged()

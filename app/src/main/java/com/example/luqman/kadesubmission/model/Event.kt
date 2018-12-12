@@ -1,7 +1,5 @@
 package com.example.luqman.kadesubmission.model
 
-import android.os.Parcel
-import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 data class Event(

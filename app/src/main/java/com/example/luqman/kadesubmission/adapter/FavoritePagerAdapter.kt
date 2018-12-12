@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter
 import com.example.luqman.kadesubmission.fragment.FavoriteMatchFragment
 import com.example.luqman.kadesubmission.fragment.FavoriteTeamFragment
 
-class FavoritePagerAdapter(fm: FragmentManager): FragmentPagerAdapter(fm){
+class FavoritePagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     private val pages = listOf<Fragment>(
         FavoriteMatchFragment(),
@@ -22,7 +22,7 @@ class FavoritePagerAdapter(fm: FragmentManager): FragmentPagerAdapter(fm){
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
-        return when(position){
+        return when (position) {
             0 -> "MATCHES"
             1 -> "TEAMS"
             else -> "Looh"

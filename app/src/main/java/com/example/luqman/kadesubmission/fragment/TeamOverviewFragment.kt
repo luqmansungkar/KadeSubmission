@@ -18,7 +18,7 @@ import org.jetbrains.anko.*
 import org.jetbrains.anko.support.v4.find
 import org.jetbrains.anko.support.v4.nestedScrollView
 
-class TeamOverviewFragment: Fragment(), AnkoComponent<Context>, TeamDetailView{
+class TeamOverviewFragment : Fragment(), AnkoComponent<Context>, TeamDetailView {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return createView(AnkoContext.create(this@TeamOverviewFragment.context as Context))
@@ -36,7 +36,7 @@ class TeamOverviewFragment: Fragment(), AnkoComponent<Context>, TeamDetailView{
     }
 
     override fun createView(ui: AnkoContext<Context>): View {
-        return with(ui){
+        return with(ui) {
             nestedScrollView {
                 lparams(matchParent, matchParent)
 

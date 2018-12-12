@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter
 import com.example.luqman.kadesubmission.fragment.PlayerListFragment
 import com.example.luqman.kadesubmission.fragment.TeamOverviewFragment
 
-class TeamDetailPagerAdapter(fm: FragmentManager, var teamId: String): FragmentPagerAdapter(fm){
+class TeamDetailPagerAdapter(fm: FragmentManager, var teamId: String) : FragmentPagerAdapter(fm) {
 
     private val pages = listOf(
         TeamOverviewFragment(),
@@ -26,7 +26,7 @@ class TeamDetailPagerAdapter(fm: FragmentManager, var teamId: String): FragmentP
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
-        return when(position){
+        return when (position) {
             0 -> "OVERVIEW"
             1 -> "PLAYERS"
             else -> "eits"

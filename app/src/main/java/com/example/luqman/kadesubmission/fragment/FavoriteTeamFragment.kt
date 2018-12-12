@@ -16,7 +16,7 @@ import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.select
 import org.jetbrains.anko.support.v4.find
 
-class FavoriteTeamFragment: Fragment(){
+class FavoriteTeamFragment : Fragment() {
 
     private var favorites: MutableList<FavoriteTeam> = mutableListOf()
     private lateinit var adapter: FavoriteTeamAdapter
@@ -39,7 +39,7 @@ class FavoriteTeamFragment: Fragment(){
         showFavorite()
     }
 
-    private fun showFavorite(){
+    private fun showFavorite() {
         favorites.clear()
         context?.database?.use {
             val result = select(FavoriteTeam.FAVORITE_TEAM_TABLE)

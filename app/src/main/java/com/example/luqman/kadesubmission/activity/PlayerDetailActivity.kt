@@ -54,7 +54,7 @@ class PlayerDetailActivity : AppCompatActivity(), PlayerDetailView {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId){
+        return when (item.itemId) {
             android.R.id.home -> {
                 finish()
                 true
@@ -72,19 +72,20 @@ class PlayerDetailActivity : AppCompatActivity(), PlayerDetailView {
     }
 
     override fun showPlayerDetail(player: Player) {
-        if (player.playerFanart != null){
+        if (player.playerFanart != null) {
             Picasso.get().load(player.playerFanart).into(playerFanart)
-        }else{
-            Picasso.get().load("http://scanyourentirelife.com/wp-content/uploads/2014/06/image-placeholder-1.jpeg").into(playerFanart)
+        } else {
+            Picasso.get().load("http://scanyourentirelife.com/wp-content/uploads/2014/06/image-placeholder-1.jpeg")
+                .into(playerFanart)
         }
-        if(player.playerHeight != null || player.playerHeight == ""){
+        if (player.playerHeight != null || player.playerHeight == "") {
             playerHeight.text = player.playerHeight
-        }else{
+        } else {
             playerHeight.text = "N/A"
         }
-        if(player.playerWeight != null || player.playerWeight == ""){
+        if (player.playerWeight != null || player.playerWeight == "") {
             playerWeight.text = player.playerWeight
-        }else{
+        } else {
             playerWeight.text = "N/A"
         }
         playerDesc.text = player.playerDesc

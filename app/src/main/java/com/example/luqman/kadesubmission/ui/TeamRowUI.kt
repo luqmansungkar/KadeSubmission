@@ -6,9 +6,9 @@ import android.widget.LinearLayout
 import com.example.luqman.kadesubmission.R
 import org.jetbrains.anko.*
 
-class TeamRowUI: AnkoComponent<ViewGroup>{
+class TeamRowUI : AnkoComponent<ViewGroup> {
     override fun createView(ui: AnkoContext<ViewGroup>): View {
-        return with(ui){
+        return with(ui) {
             linearLayout {
                 lparams(matchParent, wrapContent)
                 padding = dip(16)
@@ -16,7 +16,7 @@ class TeamRowUI: AnkoComponent<ViewGroup>{
 
                 imageView {
                     id = R.id.team_row_badge
-                }.lparams{
+                }.lparams {
                     height = dip(50)
                     width = dip(50)
                 }
@@ -24,7 +24,7 @@ class TeamRowUI: AnkoComponent<ViewGroup>{
                 textView {
                     id = R.id.team_row_name
                     textSize = 16f
-                }.lparams{
+                }.lparams {
                     margin = dip(15)
                 }
             }

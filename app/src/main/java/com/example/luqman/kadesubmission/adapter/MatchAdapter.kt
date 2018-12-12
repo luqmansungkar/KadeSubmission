@@ -17,10 +17,12 @@ import com.example.luqman.kadesubmission.activity.MatchDetailActivity
 import com.example.luqman.kadesubmission.model.Event
 import com.example.luqman.kadesubmission.ui.MatchRowUI
 import com.example.luqman.kadesubmission.util.DateTimeUtil
-import org.jetbrains.anko.*
+import org.jetbrains.anko.AnkoContext
+import org.jetbrains.anko.find
+import org.jetbrains.anko.startActivity
 
-class MatchAdapter(private val events: List<Event>):
-        RecyclerView.Adapter<MatchViewHolder>(), Filterable{
+class MatchAdapter(private val events: List<Event>) :
+    RecyclerView.Adapter<MatchViewHolder>(), Filterable {
 
     private var filteredEvent: List<Event> = events
 
@@ -42,12 +44,12 @@ class MatchAdapter(private val events: List<Event>):
     }
 
     override fun getFilter(): Filter {
-        return object : Filter(){
+        return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val searchQuery = constraint.toString()
-                if(searchQuery.isEmpty()){
+                if (searchQuery.isEmpty()) {
                     filteredEvent = events
-                }else{
+                } else {
                     val filtered: MutableList<Event> = mutableListOf()
                     events.forEach {
                         var homeTeamName = it.homeTeam
@@ -56,7 +58,7 @@ class MatchAdapter(private val events: List<Event>):
                         var awayTeamName = it.awayTeam
                         awayTeamName = awayTeamName ?: ""
 
-                        if(homeTeamName.contains(searchQuery, true) || awayTeamName.contains(searchQuery, true) ){
+                        if (homeTeamName.contains(searchQuery, true) || awayTeamName.contains(searchQuery, true)) {
                             filtered.add(it)
                         }
                     }
@@ -77,7 +79,7 @@ class MatchAdapter(private val events: List<Event>):
 
 }
 
-class MatchViewHolder(view: View, val context: Context): RecyclerView.ViewHolder(view){
+class MatchViewHolder(view: View, val context: Context) : RecyclerView.ViewHolder(view) {
     private val matchDate: TextView = view.find(R.id.match_date)
     private val matchTime: TextView = view.find(R.id.match_time)
     private val homeTeam: TextView = view.find(R.id.home_team)
@@ -85,24 +87,25 @@ class MatchViewHolder(view: View, val context: Context): RecyclerView.ViewHolder
     private val awayTeam: TextView = view.find(R.id.away_team)
     private val awayScore: TextView = view.find(R.id.away_score)
 
-    fun bindItem(event: Event){
-        val sourceDateTimeString = event.matchDate+" "+event.matchTime
+    fun bindItem(event: Event) {
+        val sourceDateTimeString = event.matchDate + " " + event.matchTime
         val sourceDateTimeFormat = "yyyy-MM-dd HH:mm:ssZZ"
 
-        val dateString: String = DateTimeUtil.formatDateTime(sourceDateTimeString, sourceDateTimeFormat, "EEE, dd MMM yyyy")
+        val dateString: String =
+            DateTimeUtil.formatDateTime(sourceDateTimeString, sourceDateTimeFormat, "EEE, dd MMM yyyy")
         val timeString: String = DateTimeUtil.formatDateTime(sourceDateTimeString, sourceDateTimeFormat, "HH:mm")
 
         val dateSpannable = SpannableStringBuilder(dateString)
-        dateSpannable.setSpan(StyleSpan(Typeface.BOLD), 0,dateString.length, 0)
-        dateSpannable.setSpan(ForegroundColorSpan(Color.GRAY),0, dateString.length, 0)
-        matchDate.text =  dateSpannable
+        dateSpannable.setSpan(StyleSpan(Typeface.BOLD), 0, dateString.length, 0)
+        dateSpannable.setSpan(ForegroundColorSpan(Color.GRAY), 0, dateString.length, 0)
+        matchDate.text = dateSpannable
         matchTime.text = timeString
         homeTeam.text = event.homeTeam
 
-        val homeScoreText = if(event.homeScore == null) "" else event.homeScore.toString()
+        val homeScoreText = if (event.homeScore == null) "" else event.homeScore.toString()
         homeScore.text = homeScoreText
         awayTeam.text = event.awayTeam
-        val awayScoreText = if(event.awayScore == null) "" else event.awayScore.toString()
+        val awayScoreText = if (event.awayScore == null) "" else event.awayScore.toString()
         awayScore.text = awayScoreText
 
 

@@ -5,12 +5,12 @@ import android.view.ViewGroup
 import com.example.luqman.kadesubmission.R
 import org.jetbrains.anko.*
 
-class MatchRowUI: AnkoComponent<ViewGroup>{
+class MatchRowUI : AnkoComponent<ViewGroup> {
     override fun createView(ui: AnkoContext<ViewGroup>): View {
-        return with(ui){
+        return with(ui) {
             verticalLayout {
-                lparams(matchParent, wrapContent){
-                    setPadding(0,0,0, dip(50))
+                lparams(matchParent, wrapContent) {
+                    setPadding(0, 0, 0, dip(50))
                 }
 
                 textView {
@@ -32,7 +32,7 @@ class MatchRowUI: AnkoComponent<ViewGroup>{
                         id = R.id.home_team
                         textAlignment = View.TEXT_ALIGNMENT_TEXT_END
                         textSize = sp(6f).toFloat()
-                    }.lparams(matchParent, wrapContent){
+                    }.lparams(matchParent, wrapContent) {
                         weight = 1f
                     }
 
@@ -40,14 +40,14 @@ class MatchRowUI: AnkoComponent<ViewGroup>{
                         id = R.id.home_score
                         textAlignment = View.TEXT_ALIGNMENT_CENTER
                         textSize = sp(9f).toFloat()
-                    }.lparams(matchParent, wrapContent){
+                    }.lparams(matchParent, wrapContent) {
                         weight = 1.2f
                     }
 
                     textView {
                         text = context.getString(R.string.vs_string)
                         textAlignment = View.TEXT_ALIGNMENT_CENTER
-                    }.lparams(matchParent, wrapContent){
+                    }.lparams(matchParent, wrapContent) {
                         weight = 1.2f
                     }
 
@@ -55,14 +55,14 @@ class MatchRowUI: AnkoComponent<ViewGroup>{
                         id = R.id.away_score
                         textAlignment = View.TEXT_ALIGNMENT_CENTER
                         textSize = sp(9f).toFloat()
-                    }.lparams(matchParent, wrapContent){
+                    }.lparams(matchParent, wrapContent) {
                         weight = 1.2f
                     }
 
                     textView {
                         id = R.id.away_team
                         textSize = sp(6f).toFloat()
-                    }.lparams(matchParent, wrapContent){
+                    }.lparams(matchParent, wrapContent) {
                         weight = 1f
                     }
                 }

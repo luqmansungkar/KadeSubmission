@@ -14,8 +14,8 @@ class PlayerDetailPresenter(
     private val view: PlayerDetailView,
     private val apiRepository: ApiRepository,
     private val gson: Gson
-){
-    fun getPlayerDetails(playerId: String?){
+) {
+    fun getPlayerDetails(playerId: String?) {
         EspressoIdlingResource.increment()
         view.showLoading()
         val url: String = TheSportDBApi.getPlayerDetailsById(playerId)

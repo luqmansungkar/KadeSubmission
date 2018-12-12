@@ -9,7 +9,7 @@ import com.example.luqman.kadesubmission.R
 import com.example.luqman.kadesubmission.adapter.MatchPagerAdapter
 import kotlinx.android.synthetic.main.match_fragment.*
 
-class MatchFragment: Fragment(){
+class MatchFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.match_fragment, container, false)

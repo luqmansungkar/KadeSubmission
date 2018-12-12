@@ -11,9 +11,9 @@ import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.support.v4.nestedScrollView
 
-class PlayerListUI(var playerAdapter: PlayerAdapter): AnkoComponent<Fragment>{
+class PlayerListUI(var playerAdapter: PlayerAdapter) : AnkoComponent<Fragment> {
     override fun createView(ui: AnkoContext<Fragment>): View {
-        return with(ui){
+        return with(ui) {
             nestedScrollView {
                 lparams(matchParent, matchParent)
                 linearLayout {
@@ -35,7 +35,7 @@ class PlayerListUI(var playerAdapter: PlayerAdapter): AnkoComponent<Fragment>{
                         orientation = LinearLayout.VERTICAL
                         imageView {
                             setImageResource(R.drawable.ic_sentiment_dissatisfied_black_24dp)
-                        }.lparams(dip(200), dip(200)){
+                        }.lparams(dip(200), dip(200)) {
                             gravity = Gravity.CENTER
                         }
                         textView {
@@ -46,7 +46,7 @@ class PlayerListUI(var playerAdapter: PlayerAdapter): AnkoComponent<Fragment>{
 
                     progressBar {
                         id = R.id.list_player_progress_bar
-                    }.lparams{
+                    }.lparams {
                         gravity = Gravity.CENTER
                     }
                 }

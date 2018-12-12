@@ -14,23 +14,23 @@ import kotlinx.coroutines.launch
 class TeamPresenter(
     private val apiRepository: ApiRepository,
     private val gson: Gson
-){
+) {
     private var view: TeamView? = null
 
-    fun onAttach(view: TeamView){
+    fun onAttach(view: TeamView) {
         this.view = view
     }
 
-    fun onDettach(){
+    fun onDettach() {
         view = null
     }
 
-    fun getLeagueList(){
+    fun getLeagueList() {
         EspressoIdlingResource.increment()
         view?.showLoading()
         val url: String = TheSportDBApi.getListAllLeagues()
 
-        GlobalScope.launch(Dispatchers.Main){
+        GlobalScope.launch(Dispatchers.Main) {
             val data = gson.fromJson(apiRepository.doRequest(url).await(), LeagueResponse::class.java)
 
             view?.hideLoading()
@@ -38,12 +38,12 @@ class TeamPresenter(
         }
     }
 
-    fun getTeamList(leagueId: String?){
+    fun getTeamList(leagueId: String?) {
         EspressoIdlingResource.increment()
         view?.showLoading()
         val url: String = TheSportDBApi.getListTeamsByLeague(leagueId)
 
-        GlobalScope.launch(Dispatchers.Main){
+        GlobalScope.launch(Dispatchers.Main) {
             val data = gson.fromJson(apiRepository.doRequest(url).await(), TeamResponse::class.java)
 
             view?.hideLoading()

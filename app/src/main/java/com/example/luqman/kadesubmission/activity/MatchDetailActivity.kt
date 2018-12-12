@@ -36,7 +36,7 @@ import org.jetbrains.anko.find
 import org.jetbrains.anko.setContentView
 import org.jetbrains.anko.toast
 
-class MatchDetailActivity: AppCompatActivity(), DetailView {
+class MatchDetailActivity : AppCompatActivity(), DetailView {
 
     private var menuItem: Menu? = null
     private var isFavorite: Boolean = false
@@ -111,11 +111,11 @@ class MatchDetailActivity: AppCompatActivity(), DetailView {
         presenter.getMatchDetails(matchId)
     }
 
-    private fun favoriteState(){
+    private fun favoriteState() {
         database.use {
             val result = select(Favorite.TABLE_FAVORITE).whereArgs("(MATCH_ID = {id})", "id" to matchId)
             val favorite = result.parseList(classParser<Favorite>())
-            if(! favorite.isEmpty()){
+            if (!favorite.isEmpty()) {
                 isFavorite = true
             }
         }
@@ -138,10 +138,11 @@ class MatchDetailActivity: AppCompatActivity(), DetailView {
 
         this.match = match
 
-        val sourceDateTimeString = match.matchDate+" "+match.matchTime
+        val sourceDateTimeString = match.matchDate + " " + match.matchTime
         val sourceDateTimeFormat = "yyyy-MM-dd HH:mm:ssZZ"
 
-        val dateString: String = DateTimeUtil.formatDateTime(sourceDateTimeString, sourceDateTimeFormat, "EEE, dd MMM yyyy")
+        val dateString: String =
+            DateTimeUtil.formatDateTime(sourceDateTimeString, sourceDateTimeFormat, "EEE, dd MMM yyyy")
         val timeString: String = DateTimeUtil.formatDateTime(sourceDateTimeString, sourceDateTimeFormat, "HH:mm")
 
         matchDate.text = dateString
@@ -152,18 +153,18 @@ class MatchDetailActivity: AppCompatActivity(), DetailView {
         val homeScoreString = match.homeScore.toString()
         val homeScoreSpan = SpannableStringBuilder(homeScoreString)
         homeScoreSpan.setSpan(StyleSpan(Typeface.BOLD), 0, homeScoreString.length, 0)
-        homeScoreSpan.setSpan(ForegroundColorSpan(Color.GRAY),0, homeScoreString.length, 0)
-        homeScoreSpan.setSpan(RelativeSizeSpan(4f),0, homeScoreString.length, 0)
+        homeScoreSpan.setSpan(ForegroundColorSpan(Color.GRAY), 0, homeScoreString.length, 0)
+        homeScoreSpan.setSpan(RelativeSizeSpan(4f), 0, homeScoreString.length, 0)
 
-        val homeScoreText = if(match.homeScore == null) "" else match.homeScore.toString()
+        val homeScoreText = if (match.homeScore == null) "" else match.homeScore.toString()
         homeScore.text = homeScoreText
-        val awayScoreText = if(match.awayScore == null) "" else match.awayScore.toString()
+        val awayScoreText = if (match.awayScore == null) "" else match.awayScore.toString()
         awayScore.text = awayScoreText
         homeGoalDetail.text = match.homeGoalDetails
         awayGoalDetail.text = match.awayGoalDetails
-        val homeShotsText = if(match.homeShots == null) "" else match.homeShots.toString()
+        val homeShotsText = if (match.homeShots == null) "" else match.homeShots.toString()
         homeShots.text = homeShotsText
-        val awayShotsText = if(match.awayShots == null) "" else match.awayShots.toString()
+        val awayShotsText = if (match.awayShots == null) "" else match.awayShots.toString()
         awayShots.text = awayShotsText
         homeGk.text = match.homeGk
         homeDefense.text = match.homeDefense
@@ -178,7 +179,7 @@ class MatchDetailActivity: AppCompatActivity(), DetailView {
         EspressoIdlingResource.decrement()
     }
 
-    private fun loadTeamBadge(match: Event){
+    private fun loadTeamBadge(match: Event) {
         presenter.getTeamDetails(match.homeTeamId, homeImage)
         presenter.getTeamDetails(match.awayTeamId, awayImage)
     }
@@ -191,18 +192,18 @@ class MatchDetailActivity: AppCompatActivity(), DetailView {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId){
+        return when (item.itemId) {
             android.R.id.home -> {
                 finish()
                 true
             }
             R.id.add_to_favorite -> {
-                if(this::match.isInitialized){
-                    if(isFavorite) presenter.removeFromFavorite(match) else presenter.addToFavorite(match)
+                if (this::match.isInitialized) {
+                    if (isFavorite) presenter.removeFromFavorite(match) else presenter.addToFavorite(match)
 
                     isFavorite = !isFavorite
                     setFavorite()
-                }else{
+                } else {
                     toast("Please wait until match data loaded...").show()
                 }
                 true
@@ -211,10 +212,10 @@ class MatchDetailActivity: AppCompatActivity(), DetailView {
         }
     }
 
-    private fun setFavorite(){
-        if(isFavorite){
+    private fun setFavorite() {
+        if (isFavorite) {
             menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_added_to_favorites)
-        }else{
+        } else {
             menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_add_to_favorites)
         }
     }

@@ -19,8 +19,8 @@ import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
 
-class FavoriteMatchAdapter(private val favorite: List<Favorite>):
-    RecyclerView.Adapter<FavoriteViewHolder>(){
+class FavoriteMatchAdapter(private val favorite: List<Favorite>) :
+    RecyclerView.Adapter<FavoriteViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
         return FavoriteViewHolder(
@@ -41,7 +41,7 @@ class FavoriteMatchAdapter(private val favorite: List<Favorite>):
 
 }
 
-class FavoriteViewHolder(view: View, val context: Context): RecyclerView.ViewHolder(view){
+class FavoriteViewHolder(view: View, val context: Context) : RecyclerView.ViewHolder(view) {
     private val matchDate: TextView = view.find(R.id.match_date)
     private val matchTime: TextView = view.find(R.id.match_time)
     private val homeTeam: TextView = view.find(R.id.home_team)
@@ -49,24 +49,25 @@ class FavoriteViewHolder(view: View, val context: Context): RecyclerView.ViewHol
     private val awayTeam: TextView = view.find(R.id.away_team)
     private val awayScore: TextView = view.find(R.id.away_score)
 
-    fun bindItem(favorite: Favorite){
-        val sourceDateTimeString = favorite.matchDate+" "+favorite.matchTime
+    fun bindItem(favorite: Favorite) {
+        val sourceDateTimeString = favorite.matchDate + " " + favorite.matchTime
         val sourceDateTimeFormat = "yyyy-MM-dd HH:mm:ssZZ"
 
-        val dateString: String = DateTimeUtil.formatDateTime(sourceDateTimeString, sourceDateTimeFormat, "EEE, dd MMM yyyy")
+        val dateString: String =
+            DateTimeUtil.formatDateTime(sourceDateTimeString, sourceDateTimeFormat, "EEE, dd MMM yyyy")
         val timeString: String = DateTimeUtil.formatDateTime(sourceDateTimeString, sourceDateTimeFormat, "HH:mm")
 
         val dateSpannable = SpannableStringBuilder(dateString)
-        dateSpannable.setSpan(StyleSpan(Typeface.BOLD), 0,dateString.length, 0)
-        dateSpannable.setSpan(ForegroundColorSpan(Color.GRAY),0, dateString.length, 0)
-        matchDate.text =  dateSpannable
+        dateSpannable.setSpan(StyleSpan(Typeface.BOLD), 0, dateString.length, 0)
+        dateSpannable.setSpan(ForegroundColorSpan(Color.GRAY), 0, dateString.length, 0)
+        matchDate.text = dateSpannable
         matchTime.text = timeString
         homeTeam.text = favorite.homeTeamName
 
-        val homeScoreText = if(favorite.homeTeamScore == null) "" else favorite.homeTeamScore.toString()
+        val homeScoreText = if (favorite.homeTeamScore == null) "" else favorite.homeTeamScore.toString()
         homeScore.text = homeScoreText
         awayTeam.text = favorite.awayTeamName
-        val awayScoreText = if(favorite.awayTeamScore == null) "" else favorite.awayTeamScore.toString()
+        val awayScoreText = if (favorite.awayTeamScore == null) "" else favorite.awayTeamScore.toString()
         awayScore.text = awayScoreText
 
 

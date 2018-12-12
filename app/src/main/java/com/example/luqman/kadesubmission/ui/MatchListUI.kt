@@ -9,12 +9,12 @@ import com.example.luqman.kadesubmission.adapter.MatchAdapter
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 
-class MatchListUI(val matchAdapter: MatchAdapter): AnkoComponent<Fragment>{
-    override fun createView(ui: AnkoContext<Fragment>) = with(ui){
+class MatchListUI(val matchAdapter: MatchAdapter) : AnkoComponent<Fragment> {
+    override fun createView(ui: AnkoContext<Fragment>) = with(ui) {
         linearLayout {
-            spinner{
+            spinner {
                 id = R.id.league_spinner
-            }.lparams(matchParent, wrapContent){
+            }.lparams(matchParent, wrapContent) {
                 bottomMargin = dip(15)
             }
 
@@ -35,7 +35,7 @@ class MatchListUI(val matchAdapter: MatchAdapter): AnkoComponent<Fragment>{
                 orientation = LinearLayout.VERTICAL
                 imageView {
                     setImageResource(R.drawable.ic_sentiment_dissatisfied_black_24dp)
-                }.lparams(dip(200), dip(200)){
+                }.lparams(dip(200), dip(200)) {
                     gravity = Gravity.CENTER
                 }
                 textView {
@@ -47,7 +47,7 @@ class MatchListUI(val matchAdapter: MatchAdapter): AnkoComponent<Fragment>{
 
             progressBar {
                 id = R.id.main_progress_bar
-            }.lparams{
+            }.lparams {
                 gravity = Gravity.CENTER
             }
         }

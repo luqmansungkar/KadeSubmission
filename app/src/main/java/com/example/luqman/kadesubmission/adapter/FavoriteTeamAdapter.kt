@@ -15,7 +15,7 @@ import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
 
-class FavoriteTeamAdapter(private val favorite: List<FavoriteTeam>): RecyclerView.Adapter<FavoriteTeamViewHolder>(){
+class FavoriteTeamAdapter(private val favorite: List<FavoriteTeam>) : RecyclerView.Adapter<FavoriteTeamViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteTeamViewHolder {
         return FavoriteTeamViewHolder(
@@ -35,11 +35,11 @@ class FavoriteTeamAdapter(private val favorite: List<FavoriteTeam>): RecyclerVie
     }
 }
 
-class FavoriteTeamViewHolder(view: View, val context: Context): RecyclerView.ViewHolder(view){
+class FavoriteTeamViewHolder(view: View, val context: Context) : RecyclerView.ViewHolder(view) {
     private val teamBadge: ImageView = view.find(R.id.team_row_badge)
     private val teamName: TextView = view.find(R.id.team_row_name)
 
-    fun bindItem(favorite: FavoriteTeam){
+    fun bindItem(favorite: FavoriteTeam) {
         Picasso.get().load(favorite.teamBadge).into(teamBadge)
         teamName.text = favorite.teamName
 

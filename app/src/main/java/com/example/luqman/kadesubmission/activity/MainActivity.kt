@@ -1,7 +1,7 @@
 package com.example.luqman.kadesubmission.activity
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import com.example.luqman.kadesubmission.R
 import com.example.luqman.kadesubmission.fragment.FavoriteFragment
 import com.example.luqman.kadesubmission.fragment.MatchFragment
@@ -15,26 +15,25 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-        bottom_navigation.setOnNavigationItemSelectedListener {
-            it ->
-                when(it.itemId){
-                    R.id.matches -> {
-                        loadMatchFragment(savedInstanceState)
-                    }
-                    R.id.teams ->{
-                        loadTeamFragment(savedInstanceState)
-                    }
-                    R.id.favorites -> {
-                        loadFavoriteMatchFragment(savedInstanceState)
-                    }
+        bottom_navigation.setOnNavigationItemSelectedListener { it ->
+            when (it.itemId) {
+                R.id.matches -> {
+                    loadMatchFragment(savedInstanceState)
                 }
+                R.id.teams -> {
+                    loadTeamFragment(savedInstanceState)
+                }
+                R.id.favorites -> {
+                    loadFavoriteMatchFragment(savedInstanceState)
+                }
+            }
             true
         }
         bottom_navigation.selectedItemId = R.id.matches
     }
 
-    private fun loadMatchFragment(savedInstanceState: Bundle?){
-        if(savedInstanceState == null){
+    private fun loadMatchFragment(savedInstanceState: Bundle?) {
+        if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.main_container, MatchFragment(), MatchFragment::class.java.simpleName)
@@ -42,8 +41,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadTeamFragment(savedInstanceState: Bundle?){
-        if(savedInstanceState == null){
+    private fun loadTeamFragment(savedInstanceState: Bundle?) {
+        if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.main_container, TeamFragment(), TeamFragment::class.java.simpleName)
@@ -51,8 +50,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadFavoriteMatchFragment(savedInstanceState: Bundle?){
-        if(savedInstanceState == null){
+    private fun loadFavoriteMatchFragment(savedInstanceState: Bundle?) {
+        if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.main_container, FavoriteFragment(), FavoriteFragment::class.java.simpleName)

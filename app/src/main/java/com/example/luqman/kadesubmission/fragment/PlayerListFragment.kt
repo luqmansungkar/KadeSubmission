@@ -23,7 +23,7 @@ import com.google.gson.Gson
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.support.v4.find
 
-class PlayerListFragment: Fragment(), PlayerListView{
+class PlayerListFragment : Fragment(), PlayerListView {
 
     private var players: MutableList<Player> = mutableListOf()
 
@@ -36,7 +36,8 @@ class PlayerListFragment: Fragment(), PlayerListView{
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         adapter = PlayerAdapter(players)
-        val view = PlayerListUI(adapter).createView(AnkoContext.create(this@PlayerListFragment.context as Context, this))
+        val view =
+            PlayerListUI(adapter).createView(AnkoContext.create(this@PlayerListFragment.context as Context, this))
 
         val request = ApiRepository()
         val gson = Gson()
@@ -67,13 +68,13 @@ class PlayerListFragment: Fragment(), PlayerListView{
 
     override fun showPlayerList(players: List<Player>?) {
         this.players.clear()
-        if(players != null){
+        if (players != null) {
             this.players.addAll(players)
 
-            if (players.isEmpty()){
+            if (players.isEmpty()) {
                 empty.visible()
                 list.invisible()
-            }else{
+            } else {
                 empty.invisible()
                 list.visible()
             }

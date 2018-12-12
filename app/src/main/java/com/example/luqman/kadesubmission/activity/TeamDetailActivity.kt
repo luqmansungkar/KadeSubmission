@@ -25,7 +25,7 @@ import org.jetbrains.anko.db.select
 import org.jetbrains.anko.find
 import org.jetbrains.anko.toast
 
-class TeamDetailActivity: AppCompatActivity(), TeamDetailView{
+class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
 
     private var menuItem: Menu? = null
     private var isFavorite: Boolean = false
@@ -76,18 +76,18 @@ class TeamDetailActivity: AppCompatActivity(), TeamDetailView{
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId){
+        return when (item.itemId) {
             android.R.id.home -> {
                 finish()
                 true
             }
             R.id.add_to_favorite -> {
-                if (this::team.isInitialized){
-                    if(isFavorite) presenter.removeFromFavorite(team) else presenter.addToFavorite(team)
+                if (this::team.isInitialized) {
+                    if (isFavorite) presenter.removeFromFavorite(team) else presenter.addToFavorite(team)
 
                     isFavorite = !isFavorite
                     setFavoriteIcon()
-                }else{
+                } else {
                     toast("Please wait until team data loaded...").show()
                 }
                 true
@@ -111,20 +111,21 @@ class TeamDetailActivity: AppCompatActivity(), TeamDetailView{
         EspressoIdlingResource.decrement()
     }
 
-    private fun favoriteState(){
+    private fun favoriteState() {
         database.use {
-            val result = select(FavoriteTeam.FAVORITE_TEAM_TABLE).whereArgs(FavoriteTeam.TEAM_ID+" = {id}", "id" to teamId)
+            val result =
+                select(FavoriteTeam.FAVORITE_TEAM_TABLE).whereArgs(FavoriteTeam.TEAM_ID + " = {id}", "id" to teamId)
             val favorite = result.parseList(classParser<FavoriteTeam>())
-            if(! favorite.isEmpty()){
+            if (!favorite.isEmpty()) {
                 isFavorite = true
             }
         }
     }
 
-    private fun setFavoriteIcon(){
-        if(isFavorite){
+    private fun setFavoriteIcon() {
+        if (isFavorite) {
             menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_added_to_favorites)
-        }else{
+        } else {
             menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_add_to_favorites)
         }
     }

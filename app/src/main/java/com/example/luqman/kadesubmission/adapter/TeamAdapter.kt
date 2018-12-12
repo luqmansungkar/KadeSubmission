@@ -17,7 +17,7 @@ import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
 
-class TeamAdapter(private var teams: List<Team>): RecyclerView.Adapter<TeamViewHolder>(), Filterable{
+class TeamAdapter(private var teams: List<Team>) : RecyclerView.Adapter<TeamViewHolder>(), Filterable {
 
     private var filteredTeams: List<Team> = teams
 
@@ -39,19 +39,19 @@ class TeamAdapter(private var teams: List<Team>): RecyclerView.Adapter<TeamViewH
     }
 
     override fun getFilter(): Filter {
-        return object : Filter(){
+        return object : Filter() {
 
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val searchQuery = constraint.toString()
-                if(searchQuery.isEmpty()){
+                if (searchQuery.isEmpty()) {
                     filteredTeams = teams
-                }else{
-                    val teamFiltered : MutableList<Team> = mutableListOf()
+                } else {
+                    val teamFiltered: MutableList<Team> = mutableListOf()
                     teams.forEach {
                         var teamName = it.teamName
                         teamName = teamName ?: ""
 
-                        if(teamName.contains(searchQuery, true)){
+                        if (teamName.contains(searchQuery, true)) {
                             teamFiltered.add(it)
                         }
                     }
@@ -72,11 +72,11 @@ class TeamAdapter(private var teams: List<Team>): RecyclerView.Adapter<TeamViewH
 
 }
 
-class TeamViewHolder(view: View, val context: Context): RecyclerView.ViewHolder(view){
+class TeamViewHolder(view: View, val context: Context) : RecyclerView.ViewHolder(view) {
     private val teamBadge: ImageView = view.find(R.id.team_row_badge)
     private val teamName: TextView = view.find(R.id.team_row_name)
 
-    fun bindItem(teams: Team){
+    fun bindItem(teams: Team) {
         Picasso.get().load(teams.teamBadge).into(teamBadge)
         teamName.text = teams.teamName
 

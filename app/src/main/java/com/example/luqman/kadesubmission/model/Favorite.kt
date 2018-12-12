@@ -1,6 +1,15 @@
 package com.example.luqman.kadesubmission.model
 
-data class Favorite(val id: Long?, val matchId: String?, val matchDate: String?, val matchTime: String?, val homeTeamName: String?, val homeTeamScore: Int?, val awayTeamName: String?, val awayTeamScore: Int?){
+data class Favorite(
+    val id: Long?,
+    val matchId: String?,
+    val matchDate: String?,
+    val matchTime: String?,
+    val homeTeamName: String?,
+    val homeTeamScore: Int?,
+    val awayTeamName: String?,
+    val awayTeamScore: Int?
+) {
     companion object {
         const val TABLE_FAVORITE: String = "TABLE_FAVORITE"
         const val ID: String = "ID_"
