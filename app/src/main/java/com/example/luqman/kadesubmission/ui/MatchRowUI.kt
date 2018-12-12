@@ -45,7 +45,7 @@ class MatchRowUI: AnkoComponent<ViewGroup>{
                     }
 
                     textView {
-                        text = "VS"
+                        text = context.getString(R.string.vs_string)
                         textAlignment = View.TEXT_ALIGNMENT_CENTER
                     }.lparams(matchParent, wrapContent){
                         weight = 1.2f

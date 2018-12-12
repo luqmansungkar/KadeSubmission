@@ -4,6 +4,16 @@
     <string name="next_matches">Teams</string>
     <string name="favorites">Favorites</string>
     <string name="empty_list_string">No data available</string>
+    <string name="weight_kg">Weight (Kg)</string>
+    <string name="height_m">Height (m)</string>
+    <string name="vs_string">VS</string>
+    <string name="goals_string">Goals</string>
+    <string name="shots_string">Shots</string>
+    <string name="lineups_string">Lineups</string>
+    <string name="gk_string">Goal Keeper</string>
+    <string name="defense_string">Defense</string>
+    <string name="midfield_string">Midfield</string>
+    <string name="forward_string">Forward</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 

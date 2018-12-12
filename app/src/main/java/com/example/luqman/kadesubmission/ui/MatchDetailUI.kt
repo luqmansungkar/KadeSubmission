@@ -63,7 +63,7 @@ class MatchDetailUI: AnkoComponent<MatchDetailActivity>{
                     textView {
                         gravity = Gravity.CENTER
                         textAlignment = View.TEXT_ALIGNMENT_CENTER
-                        text = "VS"
+                        text = context.getString(R.string.vs_string)
                         textSize = sp(7f).toFloat()
                     }.lparams(matchParent, matchParent){
                         weight = 1.3f
@@ -112,7 +112,7 @@ class MatchDetailUI: AnkoComponent<MatchDetailActivity>{
 
                     textView {
                         textAlignment = View.TEXT_ALIGNMENT_CENTER
-                        text = "Goals"
+                        text = context.getString(R.string.goals_string)
                     }.lparams(matchParent, wrapContent){
                         weight = 1f
                     }
@@ -137,7 +137,7 @@ class MatchDetailUI: AnkoComponent<MatchDetailActivity>{
 
                     textView {
                         textAlignment = View.TEXT_ALIGNMENT_CENTER
-                        text = "Shots"
+                        text = context.getString(R.string.shots_string)
                     }.lparams(matchParent, wrapContent){
                         weight = 1f
                     }
@@ -161,7 +161,7 @@ class MatchDetailUI: AnkoComponent<MatchDetailActivity>{
                     lparams(matchParent, wrapContent)
 
                     textView {
-                        text = "Lineups"
+                        text = context.getString(R.string.lineups_string)
                         textSize = sp(7f).toFloat()
                         textAlignment = View.TEXT_ALIGNMENT_CENTER
                     }.lparams(matchParent, wrapContent){
@@ -178,7 +178,7 @@ class MatchDetailUI: AnkoComponent<MatchDetailActivity>{
 
                         textView {
                             textAlignment = View.TEXT_ALIGNMENT_CENTER
-                            text = "Goal Keeper"
+                            text = context.getString(R.string.gk_string)
                         }.lparams(matchParent, wrapContent){
                             weight = 1f
                         }
@@ -204,7 +204,7 @@ class MatchDetailUI: AnkoComponent<MatchDetailActivity>{
 
                         textView {
                             textAlignment = View.TEXT_ALIGNMENT_CENTER
-                            text = "Defense"
+                            text = context.getString(R.string.defense_string)
                         }.lparams(matchParent, wrapContent){
                             weight = 1f
                         }
@@ -230,7 +230,7 @@ class MatchDetailUI: AnkoComponent<MatchDetailActivity>{
 
                         textView {
                             textAlignment = View.TEXT_ALIGNMENT_CENTER
-                            text = "Midfield"
+                            text = context.getString(R.string.midfield_string)
                         }.lparams(matchParent, wrapContent){
                             weight = 1f
                         }
@@ -256,7 +256,7 @@ class MatchDetailUI: AnkoComponent<MatchDetailActivity>{
 
                         textView {
                             textAlignment = View.TEXT_ALIGNMENT_CENTER
-                            text = "Forward"
+                            text = context.getString(R.string.forward_string)
                         }.lparams(matchParent, wrapContent){
                             weight = 1f
                         }
